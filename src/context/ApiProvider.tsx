@@ -1,9 +1,8 @@
+import React from "react";
 import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import ApiContext from "./ApiContext";
-import { AuthContextInterface } from "./AuthContext";
-
-const { default: AuthContext } = require("./AuthContext");
+import AuthContext, { AuthContextInterface } from "./AuthContext";
 
 
 const ApiProvider: React.FC = ({ children }) => {

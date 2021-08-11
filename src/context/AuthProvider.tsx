@@ -1,9 +1,15 @@
+import React from "react";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-
-const { default: AuthContext } = require("./AuthContext");
+import AuthContext from "./AuthContext";
+import { roles } from "@/config/enums";
 
 export interface UserDataInterface{
+  username: string,
+  email: string,
+  id: string,
+  name: string,
+  role: roles
 }
 
 export interface TokenDataInterface{
@@ -24,7 +30,7 @@ const AuthProvider: React.FC = ({children})=>{
   }
 
   const isAuthenticated = () => {
-    return loaded && token && !isExpired();
+    return Boolean(loaded && token && !isExpired());
   }
 
   useEffect(() => {
