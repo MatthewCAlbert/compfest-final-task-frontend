@@ -5,8 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:react/recommended"
+        // "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,9 +21,9 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-extra-semi": "off",
         "@typescript-eslint/no-extra-any": "off",
-        "@typescript-eslint/no-explicit-any": "off",
+        "no-extra-semi": "off",
+        "no-unused-vars": "off",
         "react/prop-types": "off"
     },
     "ignorePatterns": [

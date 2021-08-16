@@ -6,29 +6,25 @@ import {
 
 /* Route */
 import PublicRoute from "@/routes/PublicRoute";
-import ProtectedRoute from "@/routes/ProtectedRoute";
 
 /* Config */
-import route from './config/route';
+import {privateRoute, publicRoute} from './config/route';
 
-function App() {
-  const generateRoute = () => {
-    return route.map((entry, idx) => {
+const App: React.FC = ()=>{
+  const generatePublicRoute = () => {
+    return publicRoute.map((entry, idx) => {
       return (
-        <ProtectedRoute exact={entry.exact} key={idx} path={entry.path} Component={<></>} />
+        <PublicRoute exact={entry.exact} key={idx} path={entry.path} Component={entry.component} />
       );
     });
   }
 
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <PublicRoute path="/login" Component={<></>} />
-          {generateRoute()}
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Switch>
+        {generatePublicRoute()}
+      </Switch>
+    </Router>
   );
 }
 

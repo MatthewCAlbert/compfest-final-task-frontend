@@ -1,0 +1,118 @@
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://use.fontawesome.com/releases/v5.10.2/css/all.css");
+@import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
+@import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css");
+
+$primary-white: #fffefb;
+$primary-black: #111111;
+
+html,
+body,
+#root {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  background-color: #f7f7f7;
+
+  // ColorBlind go brrr
+  // filter: grayscale(100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: inherit;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.slick-slide {
+  &:focus {
+    outline: none !important;
+    border: none !important;
+  }
+}
+.fw-600 {
+  font-weight: 600 !important;
+}
+.no-select {
+  user-select: none;
+}
+
+.image-container {
+  display: block;
+  position: relative;
+  & > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  &.buffed {
+    min-width: 100%;
+    min-height: 100%;
+    img {
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+}
+
+.bg-image-center {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+  background-size: cover;
+  &.bg-opaque {
+    filter: opacity(0.6);
+  }
+}
+.bg-image-absolute {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.vh-100 {
+  height: 100vh;
+}
+.m-vh-100 {
+  min-height: 100vh;
+}
+.m-vh-90 {
+  min-height: 90vh;
+}
+
+.form-control {
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  width: 100%;
+  .section-inner {
+    width: 100%;
+  }
+}
+
+@import "slickcustom";

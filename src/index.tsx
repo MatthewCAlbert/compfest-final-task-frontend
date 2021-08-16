@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
-import AuthProvider from '@/context/AuthProvider';
-import ApiProvider from '@/context/ApiProvider';
 import reportWebVitals from './reportWebVitals';
+import "./styles/globals.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <ApiProvider>
-        <App />
-      </ApiProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <App/>
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -20,4 +18,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();

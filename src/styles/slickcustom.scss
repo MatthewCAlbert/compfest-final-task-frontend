@@ -1,0 +1,54 @@
+@import "_variables.scss";
+
+section.section-carousel {
+  .slick-slider {
+    // .slick-dots {
+    //   bottom: 20px;
+    //   position: absolute;
+    //   li {
+    //     button {
+    //       &::before {
+    //         color: $primary-blue1;
+    //         font-size: 10px;
+    //       }
+    //     }
+    //   }
+    // }
+    .slick-arrow {
+      z-index: 5;
+      &.slick-prev::before,
+      &.slick-next::before {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+        // color: $primary-green;
+        border-radius: 60px;
+        background-color: $palewhite;
+        // border: 3px solid $primary-green;
+
+        // Props
+        font-size: 22px;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          background-color: hsl(230, 100%, 95%);
+        }
+      }
+      &.slick-prev {
+        left: -5px;
+        &::before {
+          content: "\f053";
+        }
+      }
+      &.slick-next {
+        right: 15px;
+        &::before {
+          content: "\f054";
+        }
+      }
+    }
+  }
+}
