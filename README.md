@@ -12,3 +12,13 @@
 - React Hook Form
 - SWR
 - JS Cookie
+
+## Docker Info
+- Build on NodeJs v12 Alpine
+- Running on Nginx Latest Alpine
+
+## Deployment using Docker
+```bash
+docker build /dir/to/project -t tagname
+docker run -p HOST_PORT:80 tagname
+```
