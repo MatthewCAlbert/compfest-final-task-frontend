@@ -29,14 +29,16 @@ jobs:
         run: |
           docker save -o ./seacf-fe.tar seacf-fe
           ls -l
+          pwd
 
       - name: Push Docker Image
         uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USERNAME }}
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          host: ${{ secrets.SSH_HOST }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: ${{ secrets.SSH_USERNAME }}
-          source: "./seacf-fe.tar --overwrite"
+          source: "seacf-fe.tar"
           target: "/var/opt/"
 
       - name: Remove Docker Image
