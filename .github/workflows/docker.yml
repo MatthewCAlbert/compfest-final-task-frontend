@@ -27,7 +27,12 @@ jobs:
 
       - name: Output Docker Image
         run: |
-          docker save -o ./seacf-fe.tar seacf-fe
+          docker save seacf-fe | gzip > seacf-fe.tar.gz
+
+      - name: Move docker cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
           
       - name: Elevate Permission
         uses: appleboy/ssh-action@master
@@ -45,12 +50,8 @@ jobs:
           USERNAME: ${{ secrets.SSH_USERNAME }}
           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          source: "seacf-fe.tar"
+          source: "seacf-fe.tar.gz"
           target: "/var/opt/"
-
-      - name: Remove Docker Image
-        run: |
-          rm -rf seacf-fe.tar
 
       - name: Deployment
         uses: appleboy/ssh-action@master
@@ -60,11 +61,12 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           script: |
             cd /var/opt/
-            sudo docker load -i seacf-fe.tar
-            sudo docker run -p 3337:80 seacf-fe
+            sudo docker load -i seacf-fe.tar.gz
+            sudo docker run -d -p 3337:80 seacf-fe
             sudo chmod -R 755 /var/opt
-            
-      - name: Move cache
+
+      - name: Remove Docker Image
+        if: always()
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          rm -rf seacf-fe.tar
+            
