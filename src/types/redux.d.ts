@@ -1,6 +1,13 @@
+import { roles } from "@/config/enums";
+
 export interface ReduxAction{
-  type:string, 
-  value:any
+  type: string, 
+  value: any
+}
+
+export interface ActionResponse{
+  type: string, 
+  response: any
 }
 
 export interface InitialState{
@@ -10,3 +17,16 @@ export interface InitialState{
 }
 
 export type ReduxReducerFunction = {(state: InitialState, action: ReduxAction): InitialState}
+
+
+export interface UserObject{
+  name?: string,
+  username?: string,
+  email?: string,
+  role?: roles,
+  token?: string
+}
+
+export interface DonationProgram{
+  
+}

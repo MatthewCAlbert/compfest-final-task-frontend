@@ -57,7 +57,7 @@ const Nav = () => {
     `}>
       <div className="nav-inner">
         <NavLink href="/" title="Home" icon="fas fa-home"/>
-        <NavLink href="/donasi" title="Donasi" icon="fas fa-hand-holding-usd"/>
+        <NavLink href="/search" title="Donasi" icon="fas fa-hand-holding-usd"/>
         <NavLink href="/dompet" title="Dompet" icon="fas fa-wallet"/>
         <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/>
         <NavLink href="/akun" title="Akun" icon="fas fa-user"/>

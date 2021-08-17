@@ -1,24 +1,33 @@
 import React from 'react'
 
 const Input: React.FC<{
-  title: string,
-  form?: any,
-  name: string,
-  setForm: {(x: any): any}
-}> = ({title, form={}, name, setForm=(x)=>{}, children = null, ...props}) => {
-  
-  const handleChange = (e: any)=>{
-    setForm({...form, [name]:e.target.value});
-  }
+  label?: string,
+  id?: string,
+  name?: string,
+  placeholder?: string,
+  register?: any,
+  type?: string,
+  required?: string,
+  autoComplete?: string,
+}> = ({label="", register, type="text", children = null, ...props}) => {
 
   return <>
   {
-      !children ? <div className="mb-4">
-      <label className="">
-        {title}
-      </label>
-      <input className="form-control" {...props} onChange={handleChange} value={form[name]}/>
-    </div>
+    !children || ["select"].includes(type)  ? (
+      <div className="mb-2">
+        <label className="" htmlFor={props?.id}>
+          {label}
+        </label>
+        {
+          type === "select" ? 
+          <select className="form-select" {...register} {...props}>
+            {children}
+          </select>
+          :
+          <input className="form-control" type={type} {...register} {...props}/>
+        }
+      </div>
+    )
     :
     children
   }

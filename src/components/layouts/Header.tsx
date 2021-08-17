@@ -6,10 +6,20 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
 
-const Header: React.FC = ({...props}) => {
+const Header: React.FC<{
+  forceSearchOpen?: boolean
+}> = ({forceSearchOpen = false, ...props}) => {
   const history = useHistory();
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState(qs.parse(history.location.search).q);
+  const isSearchPath = history.location.pathname === "/search";
+  const [searchOpen, setSearchOpen] = useState((forceSearchOpen || isSearchPath));
+  const [searchInput, setSearchInput] = useState(qs.parse(history.location.search).q || "");
+
+  const onBack = ()=>{
+    if( !forceSearchOpen && !isSearchPath )
+      setSearchOpen(false);
+    else
+      history.goBack();
+  }
 
   const onSearch = (e: any)=>{
     e.preventDefault();
@@ -75,7 +85,7 @@ const Header: React.FC = ({...props}) => {
           :
           <>
             <div className="d-flex align-items-center">
-              <i className="fas fa-chevron-left ms-2 cursor-pointer" onClick={()=>setSearchOpen(false)}></i>
+              <i className="fas fa-chevron-left ms-2 cursor-pointer" onClick={onBack}></i>
             </div>
             <div className="flex-grow-1 ms-3">
               <form onSubmit={onSearch} className="d-flex justify-content-end">

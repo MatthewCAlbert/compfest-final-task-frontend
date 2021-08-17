@@ -1,5 +1,5 @@
 FROM node:12-alpine as build
-ARG ENDPOINT_URL="https://localhost:5000"
+ARG ENDPOINT_URL="https://compfest-final-task-backend.herokuapp.com/"
 WORKDIR /app
 COPY ./package.json ./
 COPY yarn.lock ./

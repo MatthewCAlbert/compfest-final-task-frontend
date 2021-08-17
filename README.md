@@ -19,6 +19,6 @@
 
 ## Deployment using Docker
 ```bash
-docker build /dir/to/project -t tagname
-docker run -p HOST_PORT:80 tagname
+docker build . /dir/to/project -t tagname
+docker run -d -p HOST_PORT:80 tagname
 ```

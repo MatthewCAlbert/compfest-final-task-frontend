@@ -7,7 +7,7 @@ export default function PublicRoute({ Component, ...rest }: {
   path?: string,
 }) {
   return (
-    <Route
+    <Route {...rest}
       render={props => <Component {...props} />}
     />
   )

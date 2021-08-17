@@ -2,7 +2,9 @@ import IndexPage from "@/pages";
 import AccountPage from "@/pages/account";
 import DompetPage from "@/pages/dompet";
 import InboxPage from "@/pages/inbox";
+import LoginPage from "@/pages/login";
 import ProgramPage from "@/pages/program";
+import RegisterPage from "@/pages/register";
 import SearchPage from "@/pages/search";
 
 interface RouteItemInterface{
@@ -45,13 +47,25 @@ export const publicRoute: RouteItemInterface[] = [
   },
   {
     menu: {
-      name: "Account",
+      name: "Register",
       icon: "",
     },
-    path: "/akun",
-    component: AccountPage,
+    path: "/register",
+    component: RegisterPage,
     exact: true
   },
+  {
+    menu: {
+      name: "Login",
+      icon: "",
+    },
+    path: "/login",
+    component: LoginPage,
+    exact: true
+  },
+];
+
+export const privateRoute: RouteItemInterface[] = [
   {
     menu: {
       name: "Dompet",
@@ -70,7 +84,13 @@ export const publicRoute: RouteItemInterface[] = [
     component: InboxPage,
     exact: true
   },
-];
-
-export const privateRoute: RouteItemInterface[] = [
+  {
+    menu: {
+      name: "Account",
+      icon: "",
+    },
+    path: "/akun",
+    component: AccountPage,
+    exact: true
+  },
 ];
