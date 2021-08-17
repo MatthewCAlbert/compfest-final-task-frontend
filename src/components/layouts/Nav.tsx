@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { cssVariables, mq, theme } from '@/config/emotion'
 import { css } from '@emotion/react'
 import React from 'react'
@@ -60,7 +59,7 @@ const Nav = () => {
         <NavLink href="/search" title="Donasi" icon="fas fa-hand-holding-usd"/>
         <NavLink href="/dompet" title="Dompet" icon="fas fa-wallet"/>
         <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/>
-        <NavLink href="/akun" title="Akun" icon="fas fa-user"/>
+        <NavLink href="/account" title="Akun" icon="fas fa-user"/>
       </div>
     </nav>
   )

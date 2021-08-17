@@ -1,5 +1,6 @@
 import IndexPage from "@/pages";
-import AccountPage from "@/pages/account";
+import ChangePasswordPage from "@/pages/account/change-password";
+import AccountPage from "@/pages/account/index";
 import DompetPage from "@/pages/dompet";
 import InboxPage from "@/pages/inbox";
 import LoginPage from "@/pages/login";
@@ -89,8 +90,17 @@ export const privateRoute: RouteItemInterface[] = [
       name: "Account",
       icon: "",
     },
-    path: "/akun",
+    path: "/account",
     component: AccountPage,
+    exact: true
+  },
+  {
+    menu: {
+      name: "Change Account Password",
+      icon: "",
+    },
+    path: "/account/change-password",
+    component: ChangePasswordPage,
     exact: true
   },
 ];

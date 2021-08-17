@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { cssVariables } from '@/config/emotion';
 import { css } from '@emotion/react';
 import clsx from 'clsx';

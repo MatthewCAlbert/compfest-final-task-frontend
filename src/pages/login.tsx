@@ -3,17 +3,17 @@ import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { loginUserAction } from '@/redux/actions/authActions'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Input from '@/components/form/Input'
 import { Link, Redirect, useLocation } from 'react-router-dom'
-import { authContext } from '@/utils/auth'
+import { useSelector } from '@/hooks/useReduxSelector'
 
 const LoginPage = () => {
   const { state } = useLocation<{from?: string}>();
-  if( authContext.isAuthenticated() ) return <Redirect to={state?.from}/>;
 
   const dispatch = useDispatch();
-  const auth = useSelector((state)=> state);
+  const auth = useSelector((state)=> state.auth);
+  if( auth.token ) return <Redirect to={state?.from || "/"}/>;
 
   console.log(auth)
 

@@ -23,7 +23,7 @@ export interface RegisterUserRequest{
 
 export function registerUserService( registerData: RegisterUserRequest) {
   const mutator = ()=>{
-    return apiInstance.post("auth/login", registerData);
+    return apiInstance.post("auth/register", registerData);
   }
 
   return mutator();

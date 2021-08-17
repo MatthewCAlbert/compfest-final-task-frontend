@@ -15,3 +15,8 @@ export const formatDateString = (date: string | Dayjs | Date, format = "YYYY-MM-
   const parsed = dayjs(date);
   return parsed.format(format);
 }
+
+export function formatNumber(x: number){
+  if( isNaN(x) ) return 0;
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

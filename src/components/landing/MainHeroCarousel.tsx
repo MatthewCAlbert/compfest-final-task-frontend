@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { mqCustom } from '@/config/emotion'
 import { css } from '@emotion/react'
 import React from 'react'

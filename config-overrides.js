@@ -1,6 +1,7 @@
+const { override, addBabelPreset } = require("customize-cra");
 const path = require("path");
 
-module.exports = function override(config) {
+function overrideConfig(config) {
   config.resolve = {
     ...config.resolve,
     alias: {
@@ -8,6 +9,10 @@ module.exports = function override(config) {
       "@": path.resolve(__dirname, "src"),
     },
   };
-
   return config;
-};
+}
+
+module.exports = override(
+  overrideConfig,
+  addBabelPreset("@emotion/babel-preset-css-prop")
+);

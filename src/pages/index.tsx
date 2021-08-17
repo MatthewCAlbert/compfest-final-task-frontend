@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import MainHeroCarousel from '@/components/landing/MainHeroCarousel'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
@@ -18,19 +17,8 @@ const IndexPage = () => {
               id: "3312",
               title: "Ini program",
               raised: [5000,20000],
-              deadline: "12 Juli 2020"
-            }}/>
-            <ProgramItem data={{
-              id: "3312",
-              title: "Ini program",
-              raised: [5000,20000],
-              deadline: "12 Juli 2020"
-            }}/>
-            <ProgramItem data={{
-              id: "3312",
-              title: "Ini program",
-              raised: [5000,20000],
-              deadline: "12 Juli 2020"
+              deadline: "12 Juli 2020",
+              link: "/program/1111"
             }}/>
           </div>
         </div>

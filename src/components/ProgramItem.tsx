@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -58,10 +57,10 @@ const ProgramItem: React.FC<{
           overflow: hidden;
           width: 100%;
           height: 10px;
-          background-color: lightgray;
+          background-color: white;
           & > div{
             height: 10px;
-            background-color: azure;
+            background-color: grey;
           }
         `}>
           <div style={{width: `${percentage}%`}}></div>

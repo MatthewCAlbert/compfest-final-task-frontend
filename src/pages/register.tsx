@@ -1,20 +1,21 @@
 import React from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
-import { loginUserAction, registerUserAction } from '@/redux/actions/authActions'
+import { registerUserAction } from '@/redux/actions/authActions'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import Input from '@/components/form/Input'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { roles } from '@/config/enums'
-import { authContext } from '@/utils/auth'
 import toast from 'react-hot-toast'
+import { useSelector } from '@/hooks/useReduxSelector'
 
 const RegisterPage = () => {
   const { state } = useLocation<{from?: string}>();
-  if( authContext.isAuthenticated() ) return <Redirect to={state?.from}/>;
 
   const dispatch = useDispatch();
+  const auth = useSelector((state)=> state.auth);
+  if( auth.token ) return <Redirect to={state?.from || "/"}/>;
 
   const handleRegister = (data)=>{
     const {username, password, name, email, newPassword, rePassword, role} = data;
