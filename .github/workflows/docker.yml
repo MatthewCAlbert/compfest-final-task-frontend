@@ -51,7 +51,9 @@ jobs:
           script: |
             cd /var/opt/
             sudo docker load -i seacf-fe.tar.gz
-            sudo docker run -d -p 3337:80 seacf-fe
+            sudo docker stop seacf-fe-container
+            sudo docker rm seacf-fe-container
+            sudo docker run --name seacf-fe-container -d -p 3337:80 seacf-fe
             sudo chmod -R 755 /var/opt
 
       - name: Remove Docker Image

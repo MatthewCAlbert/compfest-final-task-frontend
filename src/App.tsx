@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
+  Route,
   Switch,
 } from "react-router-dom";
 
@@ -10,6 +11,7 @@ import PublicRoute from "@/routes/PublicRoute";
 /* Config */
 import {privateRoute, publicRoute} from './config/route';
 import PrivateRoute from './routes/ProtectedRoute';
+import Page404 from './pages/404';
 
 const App: React.FC = ()=>{
   const generatePrivateRoute = () => {
@@ -32,6 +34,7 @@ const App: React.FC = ()=>{
       <Switch>
         {generatePublicRoute()}
         {generatePrivateRoute()}
+        <Route component={Page404} />
       </Switch>
     </Router>
   );
