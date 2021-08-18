@@ -11,24 +11,17 @@ const SearchPage = () => {
         <div className="section-inner">
           <h2 className="mt-3 text-start w-100 h3">HASIL PENCARIAN</h2>
           <div>
-            <ProgramItem data={{
-              id: "3312",
-              title: "Ini program",
-              raised: [5000,20000],
-              deadline: "12 Juli 2020"
-            }}/>
-            <ProgramItem data={{
-              id: "3312",
-              title: "Ini program",
-              raised: [5000,20000],
-              deadline: "12 Juli 2020"
-            }}/>
-            <ProgramItem data={{
-              id: "3312",
-              title: "Ini program",
-              raised: [5000,20000],
-              deadline: "12 Juli 2020"
-            }}/>
+            {
+              [1,2,3,4].map((el, index)=>(
+                <ProgramItem key={index} data={{
+                  id: String(el),
+                  title: "Ini program",
+                  raised: [5000,20000],
+                  deadline: "12 Juli 2020",
+                  link: `/program/${el}`
+                }}/>
+              ))
+            }
           </div>
         </div>
       </section>

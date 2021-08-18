@@ -2,17 +2,19 @@ import { cssVariables } from '@/config/emotion';
 import { css } from '@emotion/react';
 import clsx from 'clsx';
 import React from 'react'
-import { Toaster } from "react-hot-toast";
 import Header from './Header';
 import Nav from './Nav';
 
 const Layout: React.FC<{
-  position?: "start" | "center"
-}> = ({children, ...props}) => {
+  position?: "start" | "center",
+  enableHeader?: boolean,
+  enableNav?: boolean
+}> = ({enableNav=true, enableHeader=true, children, ...props}) => {
   return (
     <>
-    <Header/>
-    <Toaster position="top-center" reverseOrder={false} containerStyle={{marginTop:"50px"}} />
+    {
+      enableHeader && <Header/>
+    }
     <main css={css`
       flex-grow: 1;
       min-height: 100vh;
@@ -37,7 +39,9 @@ const Layout: React.FC<{
       <main id="main" className={clsx("mb-4", props?.position === "center" && "justify-content-center")}>
         {children}
       </main>
-      <Nav/>
+      {
+        enableNav && <Nav/>
+      }
     </main>
     </>
   )

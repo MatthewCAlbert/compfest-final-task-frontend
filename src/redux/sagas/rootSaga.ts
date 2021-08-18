@@ -1,9 +1,6 @@
-import { takeLatest } from "@redux-saga/core/effects";
-import * as types from '../actions';
-import { loginSaga, logoutSaga, registerSaga } from "./handlers/auth";
+import { fork } from 'redux-saga/effects';
+import watchers from './watchers';
 
-export function* watcherSaga(){
-  yield takeLatest(types.REGISTER_USER, registerSaga);
-  yield takeLatest(types.LOGIN_USER, loginSaga);
-  yield takeLatest(types.LOGOUT_USER, logoutSaga);
-};
+export default function* startForeman() {
+  yield fork(watchers);
+}

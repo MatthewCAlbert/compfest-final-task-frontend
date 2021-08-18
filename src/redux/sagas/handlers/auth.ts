@@ -15,9 +15,14 @@ import { authContext } from '@/utils/auth';
 export function* registerSaga(payload: PayloadAction<RegisterUserRequest>) {
   try {
     const response: AxiosResponse = yield call(registerUserService, payload.payload);
-    yield [
-      put({ type: types.REGISTER_USER_SUCCESS, response })
-    ];
+    const {data} = response;
+    if( data?.token ){
+      authContext.setToken(data.token);
+      yield [
+        put({ type: types.REGISTER_USER_SUCCESS, response: data.token })
+      ];
+    }else
+      throw new Error("token invalid");
   } catch(error) {
     yield put({ type: types.REGISTER_USER_ERROR, error });
   }
@@ -26,9 +31,14 @@ export function* registerSaga(payload: PayloadAction<RegisterUserRequest>) {
 export function* loginSaga(payload: PayloadAction<LoginUserRequest>) {
   try {
     const response: AxiosResponse = yield call(loginUserService, payload.payload);
-    yield [
-      put({ type: types.LOGIN_USER_SUCCESS, response })
-    ];
+    const {data} = response;
+    if( data?.token ){
+      authContext.setToken(data.token);
+      yield [
+        put({ type: types.LOGIN_USER_SUCCESS, response: data.token })
+      ];
+    }else
+      throw new Error("token invalid");
   } catch(error) {
     yield put({ type: types.LOGIN_USER_ERROR, error });
   }

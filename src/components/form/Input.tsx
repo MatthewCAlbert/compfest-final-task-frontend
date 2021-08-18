@@ -9,6 +9,7 @@ const Input: React.FC<{
   type?: string,
   required?: string,
   autoComplete?: string,
+  rows?: number
 }> = ({label="", register, type="text", children = null, ...props}) => {
 
   return <>
@@ -23,6 +24,9 @@ const Input: React.FC<{
           <select className="form-select" {...register} {...props}>
             {children}
           </select>
+          :
+          type === "textarea" ?
+          <textarea className="form-control" {...register} {...props}></textarea> 
           :
           <input className="form-control" type={type} {...register} {...props}/>
         }

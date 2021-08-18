@@ -12,15 +12,23 @@ import PublicRoute from "@/routes/PublicRoute";
 import {privateRoute, publicRoute} from './config/route';
 import PrivateRoute from './routes/ProtectedRoute';
 import Page404 from './pages/404';
+import { useSelector } from './hooks/useReduxSelector';
+import { Toaster } from 'react-hot-toast';
 
 const App: React.FC = ()=>{
+  const auth = useSelector((state)=> state.auth);
+
   const generatePrivateRoute = () => {
     return privateRoute.map((entry, idx) => {
-      return (
-        <PrivateRoute exact={entry.exact} key={idx} path={entry.path} Component={entry.component} />
-      );
+      const current_role = auth?.user?.role;
+
+      if( !entry.requiredRoles || entry?.requiredRoles?.length < 1 || entry?.requiredRoles?.includes(current_role) )
+        return (
+          <PrivateRoute exact={entry.exact} key={idx} path={entry.path} Component={entry.component} />
+        );
     });
   }
+
   const generatePublicRoute = () => {
     return publicRoute.map((entry, idx) => {
       return (
@@ -30,6 +38,8 @@ const App: React.FC = ()=>{
   }
 
   return (
+    <>
+    <Toaster position="top-center" reverseOrder={false} containerStyle={{marginTop:"50px"}} />
     <Router>
       <Switch>
         {generatePublicRoute()}
@@ -37,6 +47,7 @@ const App: React.FC = ()=>{
         <Route component={Page404} />
       </Switch>
     </Router>
+    </>
   );
 }
 

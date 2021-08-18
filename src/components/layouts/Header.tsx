@@ -6,16 +6,21 @@ import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
 
 const Header: React.FC<{
-  forceSearchOpen?: boolean
-}> = ({forceSearchOpen = false, ...props}) => {
+  forceSearchOpen?: boolean,
+  simpleBack?: boolean,
+  customTitle?: string,
+  customCallback?: {()}
+}> = ({forceSearchOpen = false, simpleBack = false, ...props}) => {
   const history = useHistory();
   const isSearchPath = history.location.pathname === "/search";
   const [searchOpen, setSearchOpen] = useState((forceSearchOpen || isSearchPath));
   const [searchInput, setSearchInput] = useState(qs.parse(history.location.search).q || "");
 
   const onBack = ()=>{
-    if( !forceSearchOpen && !isSearchPath )
+    if( !forceSearchOpen && !isSearchPath && !simpleBack )
       setSearchOpen(false);
+    else if( props?.customCallback )
+      props.customCallback();
     else
       history.goBack();
   }
@@ -62,10 +67,10 @@ const Header: React.FC<{
         justify-content: space-between;
         align-items: center;
       }
-    `} className={clsx(searchOpen && "search-active")}>
+    `} className={clsx((searchOpen || simpleBack) && "search-active")}>
       <div className="header-inner">
         {
-          !searchOpen ?
+          !searchOpen && !simpleBack ?
           <>
             <div className="d-flex align-items-center">
               <img src="/logo512.png" alt="logo" className="app-logo" />
@@ -87,11 +92,17 @@ const Header: React.FC<{
               <i className="fas fa-chevron-left ms-2 cursor-pointer" onClick={onBack}></i>
             </div>
             <div className="flex-grow-1 ms-3">
-              <form onSubmit={onSearch} className="d-flex justify-content-end">
-                <input autoFocus type="text" autoComplete="off" onChange={(e)=>setSearchInput(e.target.value)} className="form-control" value={String(searchInput)} placeholder={`Coba cari "Dana Bansos"`} css={css`
-                  border: none;
-                `} />
-              </form>
+              {
+                !simpleBack ? (
+                  <form onSubmit={onSearch} className="d-flex justify-content-end">
+                    <input autoFocus type="text" autoComplete="off" onChange={(e)=>setSearchInput(e.target.value)} className="form-control" value={String(searchInput)} placeholder={`Coba cari "Dana Bansos"`} css={css`
+                      border: none;
+                    `} />
+                  </form>
+                ) : (
+                  <h1 className="mb-0 h5 text-center me-4">{props.customTitle || ""}</h1>
+                )
+              }
             </div>
           </>
         }

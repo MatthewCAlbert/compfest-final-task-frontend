@@ -2,6 +2,7 @@ import { cssVariables, mq, theme } from '@/config/emotion'
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import BottomNavTemplate from './BottomNavTemplate'
 
 const NavLink: React.FC<{
   href: string,
@@ -36,24 +37,7 @@ const NavLink: React.FC<{
 
 const Nav = () => {
   return (
-    <nav css={css`
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: ${cssVariables.maxWidth};
-      height: ${cssVariables.navHeight};
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: aliceblue;
-      border-top: 1px solid #e2e2e2;
-      .nav-inner{
-        padding: 0 5px;
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-      }
-    `}>
+    <BottomNavTemplate background="aliceblue">
       <div className="nav-inner">
         <NavLink href="/" title="Home" icon="fas fa-home"/>
         <NavLink href="/search" title="Donasi" icon="fas fa-hand-holding-usd"/>
@@ -61,7 +45,7 @@ const Nav = () => {
         <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/>
         <NavLink href="/account" title="Akun" icon="fas fa-user"/>
       </div>
-    </nav>
+    </BottomNavTemplate>
   )
 }
 

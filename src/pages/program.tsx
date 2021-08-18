@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { css } from '@emotion/react'
 import { useParams } from 'react-router-dom'
 import { formatNumber } from '@/utils/utils'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import BottomNavTemplate from '@/components/layouts/BottomNavTemplate'
+import DonateProgramForm from '@/components/form/DonateProgramForm'
+import Header from '@/components/layouts/Header'
+import { useSelector } from '@/hooks/useReduxSelector'
+import toast from 'react-hot-toast'
+import { mq } from '@/config/emotion'
 
 const DonatorItem: React.FC<{
   data: {
@@ -13,7 +20,7 @@ const DonatorItem: React.FC<{
   }
 }> = ({data})=>{
   return (
-    <div className="d-flex justify-content-between mb-3">
+    <div className="d-flex flex-column flex-sm-row justify-content-between mb-3">
       <div className="d-flex align-items-center">
         <div css={css`
           width: 40px;
@@ -35,14 +42,28 @@ const DonatorItem: React.FC<{
 
 const ProgramPage = () => {
   const {id} = useParams<{id: string}>();
+  const auth = useSelector((state)=> state.auth);
+  const [donationOpen, setDonationOpen] = useState(false);
   const percentage = 70;
 
+  if( donationOpen ){
+    return <DonateProgramForm backCallback={()=>setDonationOpen(false)}/>
+  }
+
+  const handleOpenDonation = ()=>{
+    if( auth.token )
+      setDonationOpen(true);
+    else
+      toast.error("Silahkan login terlebih dahulu.");
+  }
+
   return (
-    <Layout>
-      <SEO title="Program"/>
+    <>
+    <SEO title="Program"/>
+    <Layout enableNav={false}>
+      <Header simpleBack={true}/>
       <section className="section">
         <div className="section-inner pt-4">
-
           <div css={css`
             border-radius: 20px;
             overflow: hidden;
@@ -117,9 +138,12 @@ const ProgramPage = () => {
 
           <div css={css`
               border-radius: 20px;
-              background-color: lightgray;      
-              font-size: .9em;  
+              background-color: lightgray;    
               padding: 20px;
+              font-size: .83em;    
+              ${mq.sm}{
+                font-size: .9em;  
+              }
             `} className="mt-4 shadow">
             <h2 className="h5 fw-bold mb-3">Para Donatur (10)</h2>
             <div>
@@ -143,10 +167,27 @@ const ProgramPage = () => {
               </div>
             </div>
           </div>
-
         </div>
       </section>
+      
+      <BottomNavTemplate background="lightgrey">
+        <div className="nav-inner" css={css`
+          button{
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 150px;
+            font-weight: 600;
+            font-size: .9em;
+          }
+        `}>
+          <CopyToClipboard text={`${window.location.href}`} onCopy={()=>toast.success("Tautan berhasil disalin!")}>
+            <button className="btn btn-primary">Bagikan</button>
+          </CopyToClipboard>
+          <button className="btn btn-primary" onClick={handleOpenDonation}>Berdonasi</button>
+        </div>
+      </BottomNavTemplate>
     </Layout>
+    </>
   )
 }
 

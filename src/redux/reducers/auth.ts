@@ -3,7 +3,7 @@ import * as types from '../actions';
 
 const initialState: {
   token?: string,
-  user?: any
+  user?: UserObject
 } = {
   token: ""
 }
@@ -13,11 +13,11 @@ export default ( state = initialState, action: ActionResponse )=>{
 
   switch( action.type ){
     case types.LOGIN_USER_SUCCESS:
-      return {...state, response }
+      return {...state, token: response }
     case types.LOGIN_USER_ERROR:
       return {...state, response }
     case types.REGISTER_USER_SUCCESS:
-      return { ...state, response };
+      return { ...state, token: response };
     case types.REGISTER_USER_ERROR:
       return { ...state, response };
     case types.LOGOUT_USER_SUCCESS:

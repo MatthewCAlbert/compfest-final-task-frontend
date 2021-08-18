@@ -51,7 +51,7 @@ const AccountPage = () => {
             <Link to="/account/edit">Edit Profil</Link>
             <Link to="/account/change-password">Ganti Password</Link>
             <Link to="/donation/history">Donasi Saya</Link>
-            <Link to="/program/">Penggalangan Dana Saya</Link>
+            <Link to="/fundraiser/program/">Penggalangan Dana Saya</Link>
             <a className="cursor-pointer" onClick={handleLogout}>Keluar</a>
           </div>
         </div>

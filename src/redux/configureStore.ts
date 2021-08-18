@@ -2,11 +2,11 @@ import { authContext } from "@/utils/auth";
 import { applyMiddleware, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "./reducers";
-import { watcherSaga } from "./sagas/rootSaga";
+import rootSaga from "./sagas/rootSaga";
 
 const initialState = {
   auth: {
-    token: authContext.getToken() || ""
+    token: authContext.getToken() || "",
   }
 }
 
@@ -18,7 +18,7 @@ const configureStore = () => {
 
   return {
     ...createStore(rootReducer, initialState, applyMiddleware(...middleware)),
-    runSaga: sagaMiddleware.run(watcherSaga)
+    runSaga: sagaMiddleware.run(rootSaga)
   }
 };
 
