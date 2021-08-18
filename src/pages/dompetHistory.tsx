@@ -4,6 +4,7 @@ import SEO from '@/components/layouts/SEO'
 import Header from '@/components/layouts/Header'
 import { css } from '@emotion/react'
 import { formatDateString, formatNumber } from '@/utils/utils'
+import { theme } from '@/config/emotion'
 
 const DompetHistoryItem = ({data}: {
   data: {
@@ -15,7 +16,7 @@ const DompetHistoryItem = ({data}: {
   return (
     <div css={css`
       border-radius: 10px;
-      background-color: lightgrey;
+      background-color: ${theme.lightblue};
       padding: 15px;
       display: flex;
       justify-content: space-between;

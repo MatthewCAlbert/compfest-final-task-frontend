@@ -19,10 +19,11 @@ export const mqCustom = (w: number)=>{
 }
 
 export const theme = {
-  orange: "#FF8F39",
-  green: "#086F08",
-  white: "#fffefb",
-  black: "#111111",
+  primary: "",
+  secondary: "",
+  blue: "#4a8cc9",
+  darkblue: "#0b4d89",
+  lightblue: "#b4dbff",
 }
 
 export const cssVariables = {

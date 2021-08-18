@@ -1,3 +1,4 @@
+import { theme } from '@/config/emotion'
 import { formatNumber } from '@/utils/utils'
 import { css } from '@emotion/react'
 import React from 'react'
@@ -10,7 +11,8 @@ const NominalSelector: React.FC<{
   return (
     <div css={css`
       border-radius: 15px;
-      background-color: ${active ? "yellow": "lightgrey"};
+      background-color: ${active ? theme.blue: theme.lightblue};
+      color: ${active ? "white": "black"};
       padding: 10px 15px;
     `} onClick={setValue} className="cursor-pointer mb-2">
       {

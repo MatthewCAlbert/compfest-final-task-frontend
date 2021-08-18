@@ -6,6 +6,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logoutAction } from '@/redux/actions/authActions'
 import { useSelector } from '@/hooks/useReduxSelector'
+import { theme } from '@/config/emotion'
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const AccountPage = () => {
               width: 80px;
               height: 80px;
               border-radius: 80px;
-              background-color: grey;
+              background-color: ${theme.darkblue};
             `}>
 
             </div>
@@ -41,7 +42,8 @@ const AccountPage = () => {
               margin-bottom: 10px;
               padding: 10px;
               border-radius: 5px;
-              background-color: aqua;
+              background-color: ${theme.blue};
+              color: white;
               transition: .2s;
               &:hover{
                 box-shadow: 0px 5px 10px rgba(0,0,0,.1);

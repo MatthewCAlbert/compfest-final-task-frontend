@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { css } from '@emotion/react'
 import clsx from 'clsx'
 import { status } from '@/config/enums'
+import { theme } from '@/config/emotion'
 
 const ProgramItem = ({data}: {
   data: {
@@ -18,7 +19,7 @@ const ProgramItem = ({data}: {
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: lightgrey;
+      background-color: ${theme.lightblue};
       padding: 15px;
     `} className="mb-2">
       <div>

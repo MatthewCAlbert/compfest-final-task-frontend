@@ -14,7 +14,7 @@ const NavLink: React.FC<{
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: #5a5a5a;
+      color: ${theme.darkblue};
       padding: 0 10px;
       width: 90px;
       padding-top: 10px;
@@ -37,7 +37,7 @@ const NavLink: React.FC<{
 
 const Nav = () => {
   return (
-    <BottomNavTemplate background="aliceblue">
+    <BottomNavTemplate background={theme.lightblue}>
       <div className="nav-inner">
         <NavLink href="/" title="Home" icon="fas fa-home"/>
         <NavLink href="/search" title="Donasi" icon="fas fa-hand-holding-usd"/>

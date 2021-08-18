@@ -1,4 +1,4 @@
-import { mqCustom } from '@/config/emotion'
+import { mqCustom, theme } from '@/config/emotion'
 import { css } from '@emotion/react'
 import React from 'react'
 import Carousel from '../Carousel'
@@ -19,7 +19,7 @@ const MainHeroCarousel = () => {
           `}>
             <div css={css`
               overflow: hidden;
-              background-color: green;
+              background-color: ${theme.blue};
               border-radius: 7px;
               aspect-ratio: 1.89;
               min-width: 320px;

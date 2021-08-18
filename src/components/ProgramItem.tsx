@@ -1,3 +1,4 @@
+import { theme } from '@/config/emotion';
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -15,19 +16,19 @@ const ProgramItem: React.FC<{
   const percentage = data.raised[0]/data.raised[1]*100;
 
   return (
-    <Link to={data?.link || ""} className="no-select mb-3" css={css`
+    <Link to={data?.link || ""} className="no-select mb-3 shadow-sm" css={css`
       display: block;
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
-      background-color: rgba(0,0,0,0.1);
+      background-color: ${theme.lightblue};
     `}>
       <div css={css`
-        height: 150px;
+        height: 50px;
         position: relative;
         border-radius: 10px;
         overflow: hidden;
-        background-color: aqua;
+        background-color: ${theme.darkblue};
         .label{
           border-radius: 10px;
           background-color: yellow;
@@ -60,7 +61,7 @@ const ProgramItem: React.FC<{
           background-color: white;
           & > div{
             height: 10px;
-            background-color: grey;
+            background-color: ${theme.blue};
           }
         `}>
           <div style={{width: `${percentage}%`}}></div>

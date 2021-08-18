@@ -3,6 +3,7 @@ import MainHeroCarousel from '@/components/landing/MainHeroCarousel'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import ProgramItem from '@/components/ProgramItem'
+import { theme } from '@/config/emotion'
 import { roles } from '@/config/enums'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { formatNumber } from '@/utils/utils'
@@ -28,7 +29,7 @@ const IndexPage = () => {
                 <>
                 <div css={css`
                   border-radius: 10px;
-                  background-color: lightgray;
+                  background-color: ${theme.lightblue};
                   padding: 10px 15px;
                 `}>
                   <i className="fas fa-wallet me-3"></i>
@@ -61,7 +62,7 @@ const IndexPage = () => {
       <MainHeroCarousel/>
       <section className="section">
         <div className="section-inner">
-          <h2 className="mt-5 text-start w-100 h3">TERBARU</h2>
+          <h2 className="mt-5 text-start w-100 h3">Terbaru</h2>
           <div>
             <ProgramItem data={{
               id: "3312",

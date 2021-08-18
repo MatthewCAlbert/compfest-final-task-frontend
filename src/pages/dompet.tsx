@@ -6,6 +6,7 @@ import { css } from '@emotion/react'
 import { formatNumber } from '@/utils/utils'
 import toast from 'react-hot-toast'
 import NominalSelector from '@/components/form/NominalSelector'
+import { theme } from '@/config/emotion'
 
 const DompetPage = () => {
   const [selectedTopup, setSelectedTopup] = useState(-1);
@@ -33,8 +34,9 @@ const DompetPage = () => {
         <div className="section-inner pt-4">
           <div css={css`
             border-radius: 10px;
-            background-color: lightgray;
+            background-color: ${theme.blue};
             padding: 10px 15px;
+            color: white;
           `}>
             <h2 className="mb-1 h6">
               Dana eWallet
@@ -50,7 +52,7 @@ const DompetPage = () => {
         <div className="section-inner pt-4">
           <div css={css`
             border-radius: 20px;
-            background-color: gray;
+            background-color: ${theme.darkblue};
             padding: 20px;
           `}>
             <p className="fw-bold text-white">Nominal Top Up</p>

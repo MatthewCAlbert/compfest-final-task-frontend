@@ -8,6 +8,7 @@ import * as types from '@/redux/actions'
 import { useForm } from 'react-hook-form'
 import Input from '@/components/form/Input'
 import toast from 'react-hot-toast'
+import { theme } from '@/config/emotion'
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch();
@@ -28,20 +29,7 @@ const ChangePasswordPage = () => {
       <SEO title="Ubah Password"/>
       <section className="section">
         <div className="section-inner pt-4">
-          <div className="d-flex flex-column align-items-center">
-            <div css={css`
-              width: 200px;
-              height: 200px;
-              border-radius: 200px;
-              background-color: grey;
-            `}>
-
-            </div>
-            <div className="mt-3 text-center">
-              <span className="d-block h3 mb-1">Budi Wijaya</span>
-              <span className="d-block h5">Role</span>
-            </div>
-          </div>
+          <h1 className="h3 fw-bold mb-4">Ubah Password</h1>
           <div>
           <form onSubmit={handleSubmit(handleSubmission)} className="mt-4">
             <Input type="password" label="Password Lama" name="oldPassword" register={register("oldPassword", {required: true})} id="password"/>

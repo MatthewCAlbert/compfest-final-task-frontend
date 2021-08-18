@@ -9,7 +9,7 @@ const SearchPage = () => {
       <SEO title="Pencarian"/>
       <section className="section">
         <div className="section-inner">
-          <h2 className="mt-3 text-start w-100 h3">HASIL PENCARIAN</h2>
+          <h2 className="mt-3 text-start w-100 h3">Hasil Pencarian</h2>
           <div>
             {
               [1,2,3,4].map((el, index)=>(
