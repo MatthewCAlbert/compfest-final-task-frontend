@@ -6,6 +6,11 @@ export interface ActionResponse{
   error?: any
 }
 
+export interface ReducerResponse{
+  response?: any,
+  error?: any
+}
+
 export interface UserObject{
   name?: string,
   username?: string,

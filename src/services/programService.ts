@@ -1,5 +1,13 @@
 import apiInstance from "@/config/api";
 
+export function searchDonationProgramService(query: string) {
+  const fetcher = ()=>{
+    return apiInstance.get(`api/search?keyword=${encodeURI(query)}`);
+  }
+
+  return fetcher();
+}
+
 export function getDonationProgramListService() {
   const fetcher = ()=>{
     return apiInstance.get("api/donate");
@@ -16,30 +24,18 @@ export function getDonationProgramDetailService(program_id: string) {
   return fetcher();
 }
 
-export function getDonationProgramHistoryService() {
-  const fetcher = ()=>{
-    return apiInstance.get(`api/donate/history`);
-  }
-
-  return fetcher();
-}
-
-export interface DonateProgramRequest{
-  title: string,
-  detail: string,
-  amount: number
-}
-
-export function donateProgramService( request: DonateProgramRequest ) {
+export function donateProgramService( program_id: string, amount: number ) {
   const mutator = ()=>{
-    return apiInstance.post(`api/donate`, request);
+    return apiInstance.post(`api/donate/${program_id}`, {amount});
   }
 
   return mutator();
 }
 
 export interface CreateDonationProgramRequest{
-
+  title: string,
+  detail: string,
+  amount: number
 }
 
 export function createDonationProgramService( request: CreateDonationProgramRequest ) {

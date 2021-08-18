@@ -53,7 +53,7 @@ const Header: React.FC<{
         border-bottom: 1px solid #ececec;
       }
       .app-logo{
-        width: 40px;
+        height: 40px;
       }
       .app-title{
         color: white;
@@ -72,10 +72,12 @@ const Header: React.FC<{
         {
           !searchOpen && !simpleBack ?
           <>
-            <div className="d-flex align-items-center">
-              <img src="/logo512.png" alt="logo" className="app-logo" />
+            <div className="d-flex align-items-center no-select" css={css`
+              cursor: default;
+            `}>
+              <img src="/logo.png" alt="logo" className="app-logo d-none d-sm-flex" />
+              <img src="/logo-ext.png" alt="logo" className="app-logo d-sm-none" />
               <h1 className="app-title d-none d-sm-flex mb-0 ms-2">PentaPeduli</h1>
-              <h1 className="app-title d-sm-none mb-0 ms-2">PP</h1>
             </div>
             <div className="flex-grow-1 ms-3 d-flex justify-content-end">
               <div onClick={()=>setSearchOpen(true)} className="form-control" css={css`

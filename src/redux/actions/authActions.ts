@@ -1,4 +1,5 @@
 import { roles } from '@/config/enums';
+import { EditUserRequest } from '@/services/authService';
 import { UserObject } from '@/types/redux';
 import * as types from './index';
 
@@ -23,6 +24,13 @@ export const loginUserAction = (username: string, password: string) => {
     payload: {
       username, password
     }
+  }
+};
+
+export const editProfileAction = (data: EditUserRequest) => {
+  return {
+    type: types.EDIT_USER,
+    payload: data
   }
 };
 

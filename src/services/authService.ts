@@ -28,3 +28,15 @@ export function registerUserService( registerData: RegisterUserRequest) {
 
   return mutator();
 }
+
+export interface EditUserRequest{
+  name: string,
+}
+
+export function editUserProfileService( editData: EditUserRequest) {
+  const mutator = ()=>{
+    return apiInstance.put("auth/user", editData);
+  }
+
+  return mutator();
+}

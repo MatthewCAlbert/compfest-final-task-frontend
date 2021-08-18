@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 const IndexPage = () => {
   const auth = useSelector((state)=> state.auth);
 
-  const role = roles.fundraiser;
+  const role = roles.admin;
   
   return (
     <Layout>
@@ -42,7 +42,10 @@ const IndexPage = () => {
                       <Link to="/dompet/history" className="btn btn-primary"><i className="fas fa-history"></i> Riwayat</Link>
                     </>
                     :
-                    <Link to="/fundme" className="btn btn-primary w-100">Galang Dana</Link>
+                    <>
+                      <Link to="/fundme" className="btn btn-primary w-100 mb-2">Galang Dana</Link>
+                      <Link to="/fundraiser/program" className="btn btn-primary w-100 ">Lihat Program Saya</Link>
+                    </>
                   }
                 </div>
                 </>

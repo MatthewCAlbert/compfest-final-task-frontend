@@ -2,7 +2,7 @@ import apiInstance from "@/config/api";
 
 export function getUserDonationHistoryService() {
   const fetcher = ()=>{
-    return apiInstance.get("api/user/donate/history");
+    return apiInstance.get("api/donate/history");
   }
 
   return fetcher();
@@ -11,6 +11,38 @@ export function getUserDonationHistoryService() {
 export function getUserWalletInfoService() {
   const fetcher = ()=>{
     return apiInstance.get("api/wallet");
+  }
+
+  return fetcher();
+}
+
+export function getUserWalletHistoryService() {
+  const fetcher = ()=>{
+    return apiInstance.get("api/wallet/history");
+  }
+
+  return fetcher();
+}
+
+export function topUpService() {
+  const mutator = ()=>{
+    return apiInstance.post(`api/wallet`);
+  }
+
+  return mutator();
+}
+
+export function requestProgramWithdrawalService( program_id: string ) {
+  const mutator = ()=>{
+    return apiInstance.post(`api/withdraw/${program_id}`);
+  }
+
+  return mutator();
+}
+
+export function getAllFundraiserProgramService() {
+  const fetcher = ()=>{
+    return apiInstance.get(`api/donate/program`);
   }
 
   return fetcher();

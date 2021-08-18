@@ -1,10 +1,11 @@
-  
 import { put, call } from 'redux-saga/effects';
 import {
   registerUserService,
   loginUserService,
   RegisterUserRequest,
   LoginUserRequest,
+  EditUserRequest,
+  editUserProfileService,
 } from '@/services/authService';
 
 import * as types from '@/redux/actions'
@@ -44,7 +45,19 @@ export function* loginSaga(payload: PayloadAction<LoginUserRequest>) {
   }
 }
 
-export function* logoutSaga(payload) {
+export function* editUserSaga(payload: PayloadAction<EditUserRequest>) {
+  try {
+    const response: AxiosResponse = yield call(editUserProfileService, payload.payload);
+    const {data} = response;
+    yield [
+      put({ type: types.EDIT_USER_SUCCESS, response: data.token })
+    ];
+  } catch(error) {
+    yield put({ type: types.EDIT_USER_ERROR, error });
+  }
+}
+
+export function* logoutSaga() {
   authContext.setToken("");
   yield put({ type: types.LOGOUT_USER_SUCCESS, response: "ok" });
 }

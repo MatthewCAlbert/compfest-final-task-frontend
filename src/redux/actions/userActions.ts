@@ -11,3 +11,9 @@ export const getUserWalletInfo = () => {
     type: types.FETCH_USER_WALLET_INFO
   }
 };
+
+export const getUserWalletHistory = () => {
+  return {
+    type: types.FETCH_USER_WALLET_HISTORY
+  }
+};

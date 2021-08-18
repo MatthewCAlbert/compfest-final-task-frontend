@@ -1,22 +1,33 @@
 import { DonationProgram } from '@/types/redux';
 import * as types from './index';
 
-export const getDonationProgramList = (data: DonationProgram[]) => {
+export const searchDonationProgram = (query: string) => {
+  return {
+    type: types.SEARCH_DONATION_PROGRAM,
+    payload: query
+  }
+};
+
+
+export const getDonationProgramList = () => {
   return {
     type: types.FETCH_PROGRAM_LIST,
-    data
   }
 };
 
-export const getDonationProgramDetail = (data: DonationProgram) => {
+export const getDonationProgramDetail = (program_id: string) => {
   return {
     type: types.FETCH_PROGRAM_DETAIL,
-    data
+    payload: program_id
   }
 };
 
-export const getDonationProgramHistory = () => {
+export const donateDonationProgram = (program_id: string, amount: number) => {
   return {
     type: types.DONATE_DONATION_PROGRAM,
+    payload: {
+      program_id,
+      amount
+    }
   }
 };
