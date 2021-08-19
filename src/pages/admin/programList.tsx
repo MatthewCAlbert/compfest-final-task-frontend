@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { status, statusEnum } from '@/config/enums'
 import { css } from '@emotion/react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from '@/hooks/useReduxSelector'
+import { useEffect } from 'react'
+import { getPendingProgram } from '@/redux/actions/adminActions'
 
 const ProgramItem = ({data}: {
   data: {
@@ -35,6 +39,18 @@ const ProgramItem = ({data}: {
 
 
 const AdminProgramListPage = () => {
+  const admin = useSelector((state)=>state.admin);
+  const dispatch = useDispatch();
+
+  const [fetched, setFetched] = useState(false);
+
+  useEffect(()=>{
+    if( !fetched || !admin?.pendingProgram ){
+      dispatch(getPendingProgram())
+      setFetched(true);
+    }
+  },[admin]);
+
   return (
     <Layout> 
       <SEO title="Admin Program List"/>
@@ -42,16 +58,20 @@ const AdminProgramListPage = () => {
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Daftar Program</h1>
           <div>
-            <ProgramItem data={{
-              id: "123",
-              title: "Judul Saya",
-              status: status.verified,
-            }}/>
-            <ProgramItem data={{
-              id: "123",
-              title: "Judul Saya",
-              status: status.unverified,
-            }}/>
+            {
+              admin?.pendingProgram?.response?.data?.length < 1 && (
+                <p>Tidak ada program yang belum diverifikasi.</p>
+              )
+            }
+            {
+              admin?.pendingProgram?.response?.data?.map((el)=>(
+                <ProgramItem key={el.ID} data={{
+                  id: el.ID,
+                  title: el?.title,
+                  status: el?.status,
+                }}/>
+              ))
+            }
           </div>
         </div>
       </section>

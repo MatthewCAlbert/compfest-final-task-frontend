@@ -15,23 +15,25 @@
 
 ## TODO
 - [x] Auth
-- [x] Edit Profile (left: change password)
+- [x] Edit Profile
+- [ ] Change Password
 - [x] Public Program List
 - [x] Public Program Detail
 - [x] Public Program Donate
 - [x] Top Up
 - [x] Wallet History
 - [x] Donation History
+- [ ] Inbox (tolong diisi)
 - [ ] Fundraiser: Create New Program
 - [ ] Fundraiser: My Program List 
 - [ ] Fundraiser: My Program Detail 
 - [ ] Fundraiser: My Program Withdraw 
-- [ ] Admin: Pending User 
-- [ ] Admin: Pending Program 
-- [ ] Admin: Pending Withdrawal 
-- [ ] Admin: Verify User 
-- [ ] Admin: Verify Program 
-- [ ] Admin: Verify Withdrawal 
+- [x] Admin: Pending User (left: testing)
+- [x] Admin: Pending Program (left: testing)
+- [x] Admin: Pending Withdrawal (left: testing)
+- [x] Admin: Verify User (left: testing)
+- [x] Admin: Verify Program (left: testing)
+- [x] Admin: Verify Withdrawal (left: testing)
 
 ## Docker Info
 - Build on NodeJs v12 Alpine

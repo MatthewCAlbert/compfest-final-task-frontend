@@ -9,9 +9,7 @@ export function* createDonationProgramSaga(payload: PayloadAction<CreateDonation
   try {
     const response: AxiosResponse = yield call(createDonationProgramService, payload.payload);
     const {data} = response;
-    yield [
-      put({ type: types.CREATE_DONATION_PROGRAM_SUCCESS, response: data })
-    ];
+    yield put({ type: types.CREATE_DONATION_PROGRAM_SUCCESS, response: data });
   } catch(error) {
     yield put({ type: types.CREATE_DONATION_PROGRAM_ERROR, error });
   }
@@ -21,9 +19,7 @@ export function* getAllFundraiserProgramSaga() {
   try {
     const response: AxiosResponse = yield call(getAllFundraiserProgramService);
     const {data} = response;
-    yield [
-      put({ type: types.FETCH_ALL_FUNDRAISER_PROGRAM_SUCCESS, response: data })
-    ];
+    yield put({ type: types.FETCH_ALL_FUNDRAISER_PROGRAM_SUCCESS, response: data });
   } catch(error) {
     yield put({ type: types.FETCH_ALL_FUNDRAISER_PROGRAM_ERROR, error });
   }
@@ -33,9 +29,7 @@ export function* createProgramWithdrawalRequestSaga(payload: PayloadAction<strin
   try {
     const response: AxiosResponse = yield call(requestProgramWithdrawalService, payload.payload);
     const {data} = response;
-    yield [
-      put({ type: types.FETCH_PROGRAM_DETAIL_SUCCESS, response: data })
-    ];
+    yield put({ type: types.FETCH_PROGRAM_DETAIL_SUCCESS, response: data });
   } catch(error) {
     yield put({ type: types.FETCH_PROGRAM_DETAIL_ERROR, error });
   }
