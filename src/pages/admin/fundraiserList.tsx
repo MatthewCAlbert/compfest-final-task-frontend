@@ -3,12 +3,12 @@ import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import clsx from 'clsx'
 import { css } from '@emotion/react'
-import { status } from '@/config/enums'
+import { status, statusEnum } from '@/config/enums'
 
 const FundraiserItem = ({data}: {
   data: {
     id: string,
-    status: status
+    status: statusEnum
     name: string
   }
 })=>{

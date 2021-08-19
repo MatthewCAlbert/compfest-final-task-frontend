@@ -1,5 +1,5 @@
 import apiInstance from "@/config/api";
-import { roles } from "@/config/enums";
+import { rolesEnum } from "@/config/enums";
 
 export interface LoginUserRequest{
   username: string, password: string 
@@ -18,7 +18,7 @@ export interface RegisterUserRequest{
   username: string,
   name: string,
   password: string,
-  role: roles 
+  role: rolesEnum 
 }
 
 export function registerUserService( registerData: RegisterUserRequest) {

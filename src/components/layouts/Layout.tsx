@@ -1,4 +1,5 @@
 import { cssVariables } from '@/config/emotion';
+import useRefreshProfile from '@/hooks/useRefreshProfile';
 import { css } from '@emotion/react';
 import clsx from 'clsx';
 import React from 'react'
@@ -10,6 +11,9 @@ const Layout: React.FC<{
   enableHeader?: boolean,
   enableNav?: boolean
 }> = ({enableNav=true, enableHeader=true, children, ...props}) => {
+  
+  useRefreshProfile();
+
   return (
     <>
     {

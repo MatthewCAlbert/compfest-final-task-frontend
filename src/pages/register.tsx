@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
-import { registerUserAction } from '@/redux/actions/authActions'
+import { clearAuthAction, registerUserAction } from '@/redux/actions/authActions'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import Input from '@/components/form/Input'
@@ -9,18 +9,32 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { roles } from '@/config/enums'
 import toast from 'react-hot-toast'
 import { useSelector } from '@/hooks/useReduxSelector'
+import LoadingScreen from '@/components/LoadingScreen'
 
 const RegisterPage = () => {
+  const [loading, setLoading] = useState(false);
   const { state } = useLocation<{from?: string}>();
 
   const dispatch = useDispatch();
   const auth = useSelector((state)=> state.auth);
-  if( auth.token ) return <Redirect to={state?.from || "/"}/>;
+
+  useEffect(()=>{
+    if( auth?.error ){
+      toast.error(auth.error?.message);
+      dispatch(clearAuthAction());
+    }
+    if( auth?.response ){
+      toast.success("Registrasi berhasil! Silahkan coba login.");
+      dispatch(clearAuthAction());
+    }
+    setLoading(false);
+  }, [auth])
 
   const handleRegister = (data)=>{
-    const {username, password, name, email, newPassword, rePassword, role} = data;
+    const {username, name, email, newPassword, rePassword, role} = data;
     if( !String(newPassword).match(/.{8,}/) ) return toast.error("Password minimal 8 karakter");
     if( newPassword !== rePassword ) return toast.error("Password tidak sama");
+    setLoading(true);
     dispatch(registerUserAction({
       email, username, name, role, password: newPassword
     }));
@@ -31,9 +45,13 @@ const RegisterPage = () => {
     handleSubmit
   } = useForm();
 
+  if( auth.response ) return <Redirect to="/login"/>;
+  else if( auth.token ) return <Redirect to={state?.from || "/"}/>;
+
   return (
     <Layout>
       <SEO title="Daftar"/>
+      <LoadingScreen show={loading}/>
       <section className="section">
         <div className="section-inner pt-4 mt-4">
           <form onSubmit={handleSubmit(handleRegister)}>

@@ -17,7 +17,7 @@ import LoginPage from "@/pages/login";
 import ProgramPage from "@/pages/program";
 import RegisterPage from "@/pages/register";
 import SearchPage from "@/pages/search";
-import { roles } from "./enums";
+import { rolesEnum } from "./enums";
 
 interface RouteItemInterface{
   menu: {
@@ -25,7 +25,7 @@ interface RouteItemInterface{
     icon?: any
   },
   path: string,
-  requiredRoles?: roles[],
+  requiredRoles?: rolesEnum[],
   component: any,
   exact: boolean
 }

@@ -4,13 +4,13 @@ import SEO from '@/components/layouts/SEO'
 import { Link } from 'react-router-dom'
 import { css } from '@emotion/react'
 import clsx from 'clsx'
-import { status } from '@/config/enums'
+import { status, statusEnum } from '@/config/enums'
 import { theme } from '@/config/emotion'
 
 const ProgramItem = ({data}: {
   data: {
     id: string,
-    status: status
+    status: statusEnum
     title: string
   }
 })=>{

@@ -1,5 +1,13 @@
 import apiInstance from "@/config/api";
 
+export function getUserProfileService() {
+  const fetcher = ()=>{
+    return apiInstance.get("api/user");
+  }
+
+  return fetcher();
+}
+
 export function getUserDonationHistoryService() {
   const fetcher = ()=>{
     return apiInstance.get("api/donate/history");

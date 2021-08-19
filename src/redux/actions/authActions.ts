@@ -1,4 +1,4 @@
-import { roles } from '@/config/enums';
+import { rolesEnum } from '@/config/enums';
 import { EditUserRequest } from '@/services/authService';
 import { UserObject } from '@/types/redux';
 import * as types from './index';
@@ -8,7 +8,7 @@ interface RegisterUserObject{
   username?: string,
   email?: string,
   password?: string,
-  role?: roles,
+  role?: rolesEnum,
 }
 
 export const registerUserAction = (user: RegisterUserObject) => {
@@ -31,6 +31,18 @@ export const editProfileAction = (data: EditUserRequest) => {
   return {
     type: types.EDIT_USER,
     payload: data
+  }
+};
+
+export const getUserProfileAction = () => {
+  return {
+    type: types.FETCH_USER_PROFILE
+  }
+};
+
+export const clearAuthAction = () => {
+  return {
+    type: types.CLEAR_AUTH_RESPONSE
   }
 };
 

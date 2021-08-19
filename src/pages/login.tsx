@@ -1,25 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
-import { loginUserAction } from '@/redux/actions/authActions'
+import { clearAuthAction, loginUserAction } from '@/redux/actions/authActions'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import Input from '@/components/form/Input'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { useSelector } from '@/hooks/useReduxSelector'
+import toast from 'react-hot-toast'
+import LoadingScreen from '@/components/LoadingScreen'
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
   const { state } = useLocation<{from?: string}>();
 
   const dispatch = useDispatch();
   const auth = useSelector((state)=> state.auth);
-  if( auth.token ) return <Redirect to={state?.from || "/"}/>;
 
-  console.log(auth)
+  useEffect(()=>{
+    if( auth?.error ){
+      toast.error(auth.error?.message);
+      dispatch(clearAuthAction());
+    }
+    if( auth?.response ){
+      toast.success("Login berhasil!");
+      dispatch(clearAuthAction());
+    }
+    setLoading(false);
+  }, [auth])
 
   const handleLogin = (data)=>{
     const {username, password} = data;
     dispatch(loginUserAction(username, password));
+    setLoading(true);
   }
 
   const {
@@ -27,9 +40,12 @@ const LoginPage = () => {
     handleSubmit
   } = useForm();
 
+  if( auth?.token ) return <Redirect to={state?.from || "/"}/>;
+
   return (
     <Layout>
       <SEO title="Masuk"/>
+      <LoadingScreen show={loading} />
       <section className="section justify-content-center">
         <div className="section-inner pt-4 mt-5">
           <form onSubmit={handleSubmit(handleLogin)}>
