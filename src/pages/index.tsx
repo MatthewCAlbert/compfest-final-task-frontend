@@ -85,12 +85,12 @@ const IndexPage = () => {
           <div>
             {
               program.programList?.response?.data?.map((el,id)=>(
-                <ProgramItem key={el.ID} data={{
-                  id: el.ID,
+                <ProgramItem key={el.id} data={{
+                  id: el.id,
                   title: el?.title,
-                  raised: [5000,el?.amount],
-                  deadline: "12 Juli 2020",
-                  link: `/program/${el.ID}`
+                  raised: [el?.collected,el?.amount],
+                  deadline: el?.deadline,
+                  link: `/program/${el.id}`
                 }}/>
               ))
             }

@@ -1,5 +1,5 @@
 import { theme } from '@/config/emotion';
-import { formatNumber } from '@/utils/utils';
+import { formatDateString, formatNumber } from '@/utils/utils';
 import { css } from '@emotion/react'
 import React from 'react'
 
@@ -10,7 +10,8 @@ const ProgramDetailTemplate = ({data, adminMode = false}: {
     title?: string,
     donator?: number,
     amount?: [number, number],
-    content?: string
+    content?: string,
+    deadline?: string
   },
   adminMode?: boolean
 }) => {
@@ -26,14 +27,14 @@ const ProgramDetailTemplate = ({data, adminMode = false}: {
         width: 100%;
         height: 150px;
         position: relative;
-        & > div{
+        & > .asker{
           position: absolute;
           bottom: 20px;
           left: 25px;
           color: white;
         }
       `}>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center asker">
           <div css={css`
             width: 45px;
             height: 45px;
@@ -45,12 +46,19 @@ const ProgramDetailTemplate = ({data, adminMode = false}: {
             <span className="d-block h6 mb-0">{data?.name}</span>
           </div>
         </div>
+        <div css={css`
+          position: absolute;
+          top: 20px;
+          right: 25px;
+        `}>
+          <span className="badge bg-warning text-dark">{formatDateString(data?.deadline, "DD MMMM YYYY")}</span>
+        </div>
       </div>
       <div className="px-3 py-4" css={css`
         font-size: .9em;
       `}>
         <h1 className="h4 fw-bold">{data?.title}</h1>
-        <p className="mb-1">{data?.donator} Donatur</p>
+        <p className="mb-1">{data?.donator || 0} Donatur</p>
         
         {
           !adminMode && (

@@ -16,24 +16,30 @@
 ## TODO
 - [x] Auth
 - [x] Edit Profile
-- [ ] Change Password
-- [x] Public Program List
-- [x] Public Program Detail
+- [x] Change Password (left: api)
+- [x] Search (left: api fix)
+- [x] Public Program List (left: api fix)
+- [x] Public Program Detail (left: api fix)
 - [x] Public Program Donate
 - [x] Top Up
 - [x] Wallet History
 - [x] Donation History
 - [ ] Inbox (tolong diisi)
-- [ ] Fundraiser: Create New Program
-- [ ] Fundraiser: My Program List 
-- [ ] Fundraiser: My Program Detail 
-- [ ] Fundraiser: My Program Withdraw 
-- [x] Admin: Pending User (left: testing)
+- [x] Fundraiser: Create New Program
+- [x] Fundraiser: My Program List 
+- [x] Fundraiser: My Program Detail (left: testing)
+- [x] Fundraiser: My Program Withdraw (left: testing)
+- [x] Admin: Pending Fundraiser
 - [x] Admin: Pending Program (left: testing)
 - [x] Admin: Pending Withdrawal (left: testing)
-- [x] Admin: Verify User (left: testing)
+- [x] Admin: Verify Fundraiser
 - [x] Admin: Verify Program (left: testing)
 - [x] Admin: Verify Withdrawal (left: testing)
+
+## Notice
+- Expired Token Not Handled Yet.
+- Donation Programs not available yet to public.
+- Main Carousel not filled yet.
 
 ## Docker Info
 - Build on NodeJs v12 Alpine

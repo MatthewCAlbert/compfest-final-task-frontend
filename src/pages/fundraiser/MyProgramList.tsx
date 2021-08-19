@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { Link } from 'react-router-dom'
@@ -6,6 +6,9 @@ import { css } from '@emotion/react'
 import clsx from 'clsx'
 import { status, statusEnum } from '@/config/enums'
 import { theme } from '@/config/emotion'
+import { useSelector } from '@/hooks/useReduxSelector'
+import { useDispatch } from 'react-redux'
+import { getAllFundraiserProgram } from '@/redux/actions/fundraiserActions'
 
 const ProgramItem = ({data}: {
   data: {
@@ -36,6 +39,19 @@ const ProgramItem = ({data}: {
 
 
 const FundraiserProgramListPage = () => {
+  const fundraiser = useSelector((state)=>state.fundraiser);
+  const dispatch = useDispatch();
+
+  const [fetched, setFetched] = useState(false);
+
+  useEffect(()=>{
+    if( !fetched || !fundraiser?.fundraiserProgram ){
+      dispatch(getAllFundraiserProgram())
+      setFetched(true);
+    }
+    console.log(fundraiser?.fundraiserProgram)
+  },[fundraiser]);
+
   return (
     <Layout> 
       <SEO title="Program Saya"/>
@@ -43,16 +59,23 @@ const FundraiserProgramListPage = () => {
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Program Saya</h1>
           <div>
-            <ProgramItem data={{
-              id: "123",
-              title: "Judul Saya",
-              status: status.verified,
-            }}/>
-            <ProgramItem data={{
-              id: "123",
-              title: "Judul Saya",
-              status: status.unverified,
-            }}/>
+            {
+              fundraiser?.fundraiserProgram?.response?.data?.length < 1 && (
+                <p>Anda belum memiliki program apapun.
+                  <br />
+                  <Link to="/fundme" className="text-primary">Klik di sini untuk mulai galang dana</Link>
+                </p>
+              )
+            }
+            {
+              fundraiser?.fundraiserProgram?.response?.data?.map((el)=>(
+                <ProgramItem key={el.ID} data={{
+                  id: el.ID,
+                  title: el?.title,
+                  status: el?.status,
+                }}/>
+              ))
+            }
           </div>
         </div>
       </section>

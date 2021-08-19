@@ -10,6 +10,12 @@ const ErrorPage: React.FC<{
   code?: number,
   useBack?: boolean
 }> = ({ title = "404", code = 404, message= "Sepertinya anda kehilangan jejak", useBack = false }) => {
+  const errorMessage = {
+    404: "Not Found",
+    403: "Forbidden",
+    401: "Unauthorized",
+  };
+  
   return (
     <Layout position="center" enableHeader={!useBack}>
       {
@@ -18,7 +24,7 @@ const ErrorPage: React.FC<{
       <SEO title={title}/>
       <section className="section">
         <div className="section-inner text-center mb-5">
-          <h1>{code} Not Found</h1>
+          <h1>{code} {errorMessage[code]}</h1>
           <p>{message}</p>
           <Link to="/" className="text-primary">Kembali ke Halaman Utama</Link>
         </div>

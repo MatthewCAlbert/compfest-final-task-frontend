@@ -1,6 +1,6 @@
 import { theme } from '@/config/emotion';
 import { useSelector } from '@/hooks/useReduxSelector';
-import { clearDonateDonationProgramResponse, donateDonationProgram } from '@/redux/actions/programActions';
+import { clearCreateProgramWithdrawalRequestResponse, createProgramWithdrawalRequest } from '@/redux/actions/fundraiserActions';
 import { getUserWalletInfo } from '@/redux/actions/userActions';
 import { formatNumber } from '@/utils/utils';
 import { css } from '@emotion/react';
@@ -16,16 +16,22 @@ import Layout from '../layouts/Layout';
 import LoadingScreen from '../LoadingScreen';
 import NominalSelector from './NominalSelector';
 
-const DonateProgramForm: React.FC<{
+const WithdrawDonationForm: React.FC<{
   title: string,
+  collected: number,
+  withdrawn: number,
   backCallback: {()}
 }> = ({
   title,
+  collected,
+  withdrawn,
   backCallback
 }) => {
   const {id} = useParams<{id: string}>();
-  const program = useSelector((state)=> state.program);
+  const fundraiser = useSelector((state)=> state.fundraiser);
   const dispatch = useDispatch();
+
+  const availableToWithdraw = collected - withdrawn;
 
   const [loading, setLoading] = useState(false);
   const [donationDone, setDonationDone] = useState(false);
@@ -36,28 +42,29 @@ const DonateProgramForm: React.FC<{
     10000, 20000, 50000, 100000
   ]
 
-  const handleDonate = ()=>{
-    if( selectedDonation < 0 ) return toast.error("Silahkan pilih nominal donasi terlebih dahulu.");
+  const handleWithdrawal = ()=>{
+    if( selectedDonation < 0 ) return toast.error("Silahkan pilih nominal penarikan terlebih dahulu.");
     if( customDonation < 1000 && selectedDonation === donationList.length ) return toast.error("Silahkan masukan minimal 1000 rupiah.");
     const donateAmount = selectedDonation === donationList.length ? customDonation : donationList[selectedDonation];
+    if( donateAmount > availableToWithdraw ) return toast.error("Tidak cukup dana untuk ditarik.");
     setLoading(true);
-    dispatch(donateDonationProgram(id, donateAmount));
+    dispatch(createProgramWithdrawalRequest(id, donateAmount));
   }
 
   useEffect(()=>{
-    if( program.sendDonation?.response ){
+    if( fundraiser.requestWithdrawal?.response ){
       toast.success("Berhasil Berdonasi!");
       dispatch(getUserWalletInfo());
       setDonationDone(true);
     }
-    if( program.sendDonation?.error ){
-      toast.error(program.sendDonation?.error?.response?.data?.message);
+    if( fundraiser.requestWithdrawal?.error ){
+      toast.error(fundraiser.requestWithdrawal?.error?.response?.data?.message);
     }
-    if( program.sendDonation ){
+    if( fundraiser.requestWithdrawal ){
       setLoading(false);
-      dispatch(clearDonateDonationProgramResponse());
+      dispatch(clearCreateProgramWithdrawalRequestResponse());
     }
-  },[program.sendDonation]);
+  },[fundraiser.requestWithdrawal]);
 
   const renderedDonationList = useMemo(()=>{
     return donationList.map((el,index)=>(
@@ -65,20 +72,25 @@ const DonateProgramForm: React.FC<{
     ))
   }, [selectedDonation])
 
-  if( donationDone ) return <Redirect to="/"/>
+  if( donationDone ) return <Redirect to="/fundraiser/program"/>
 
   return (
     <Layout enableNav={false}>
       <LoadingScreen show={loading}/>
-      <Header simpleBack={true} customTitle={title} customCallback={backCallback}/>
+      <Header simpleBack={true} customTitle="Penarikan Dana" customCallback={backCallback}/>
       <section className="section">
         <div className="section-inner pt-4">
+          <div className="mb-4">
+            <h1 className="h3 mb-3">{title}</h1>
+            <div>Dana yang dikumpulkan: <strong>Rp. {formatNumber(collected)}</strong></div>
+            <div>Dana yang tersedia untuk ditarik: <strong>Rp. {formatNumber(availableToWithdraw)}</strong></div>
+          </div>
           <div css={css`
             border-radius: 20px;
             background-color: ${theme.darkblue};
             padding: 20px;
           `}>
-            <p className="fw-bold text-white">Nominal Donasi</p>
+            <p className="fw-bold text-white">Nominal Penarikan</p>
             {
               renderedDonationList
             }
@@ -86,7 +98,7 @@ const DonateProgramForm: React.FC<{
             {
               selectedDonation === donationList.length && (
                 <div>
-                  <p className="fw-bold text-white mt-3">Isi Nominal Donasi</p>
+                  <p className="fw-bold text-white mt-3">Isi Nominal Penarikan</p>
                   <input type="number" min={1000} 
                   value={customDonation} onChange={(e)=>setCustomDonation(parseInt(e.target.value))}
                   className="form-control" autoFocus css={css`
@@ -110,11 +122,11 @@ const DonateProgramForm: React.FC<{
             font-weight: 600;
           }
         `}>
-          <button className="btn btn-primary w-100 mx-3" onClick={handleDonate}>Berdonasi</button>
+          <button className="btn btn-primary w-100 mx-3" onClick={handleWithdrawal}>Tarik Dana</button>
         </div>
       </BottomNavTemplate>
     </Layout>
   )
 }
 
-export default DonateProgramForm
+export default WithdrawDonationForm

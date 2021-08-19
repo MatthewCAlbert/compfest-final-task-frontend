@@ -2,7 +2,7 @@ import apiInstance from "@/config/api";
 
 export function searchDonationProgramService(query: string) {
   const fetcher = ()=>{
-    return apiInstance.get(`api/search?keyword=${encodeURI(query)}`);
+    return apiInstance.get(`api/donate/search?keyword=${encodeURI(query)}`);
   }
 
   return fetcher();
@@ -35,6 +35,7 @@ export function donateProgramService( program_id: string, amount: number ) {
 export interface CreateDonationProgramRequest{
   title: string,
   detail: string,
+  deadline: string,
   amount: number
 }
 

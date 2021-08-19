@@ -7,7 +7,8 @@ const initialState: {
   response?: any,
   error?: AxiosError,
   user?: UserObject,
-  edit?: ReducerResponse
+  edit?: ReducerResponse,
+  changePassword?: ReducerResponse
 } = {
   token: ""
 } 
@@ -33,6 +34,13 @@ export default ( state = initialState, action: ActionResponse )=>{
       return { ...state, edit: {error} };
     case types.CLEAR_EDIT_USER_RESPONSE:
       return { ...state, edit: null };
+
+    case types.CHANGE_PASSWORD_SUCCESS:
+      return { ...state, changePassword: {response} };
+    case types.CHANGE_PASSWORD_ERROR:
+      return { ...state, changePassword: {error} };
+    case types.CLEAR_CHANGE_PASSWORD_RESPONSE:
+      return { ...state, changePassword: null };
 
     case types.FETCH_USER_PROFILE_SUCCESS:
       return { ...state, user: response };

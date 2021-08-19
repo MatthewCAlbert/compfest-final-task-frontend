@@ -40,3 +40,16 @@ export function editUserProfileService( editData: EditUserRequest) {
 
   return mutator();
 }
+
+export interface ChangePasswordRequest{
+  oldPassword: string,
+  newPassword: string,
+}
+
+export function changePasswordService( data: ChangePasswordRequest) {
+  const mutator = ()=>{
+    return apiInstance.put("api/change-password", data);
+  }
+
+  return mutator();
+}

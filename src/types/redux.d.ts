@@ -13,8 +13,8 @@ export interface ReducerResponse{
 }
 
 export interface UserObject{
+  id?: string,
   name?: string,
-  // username?: string,
   email?: string,
   status?: statusEnum,
   role?: rolesEnum

@@ -86,6 +86,7 @@ export const privateRoute: RouteItemInterface[] = [
     },
     path: "/dompet",
     component: DompetPage,
+    requiredRoles: [roles.fundraiser, roles.donor],
     exact: true
   },
   {
@@ -94,6 +95,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/dompet/history",
+    requiredRoles: [roles.fundraiser, roles.donor],
     component: DompetHistoryPage,
     exact: true
   },

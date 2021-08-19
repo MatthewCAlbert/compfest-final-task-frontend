@@ -6,6 +6,8 @@ import {
   LoginUserRequest,
   EditUserRequest,
   editUserProfileService,
+  ChangePasswordRequest,
+  changePasswordService,
 } from '@/services/authService';
 
 import * as types from '@/redux/actions'
@@ -48,6 +50,16 @@ export function* editUserSaga(payload: PayloadAction<EditUserRequest>) {
     yield put({ type: types.EDIT_USER_SUCCESS, response: data });
   } catch(error) {
     yield put({ type: types.EDIT_USER_ERROR, error });
+  }
+}
+
+export function* changePasswordSaga(payload: PayloadAction<ChangePasswordRequest>) {
+  try {
+    const response: AxiosResponse = yield call(changePasswordService, payload.payload);
+    const { data } = response;
+    yield put({ type: types.CHANGE_PASSWORD_SUCCESS, response: data });
+  } catch(error) {
+    yield put({ type: types.CHANGE_PASSWORD_ERROR, error });
   }
 }
 

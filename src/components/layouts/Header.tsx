@@ -27,14 +27,12 @@ const Header: React.FC<{
 
   const onSearch = (e: any)=>{
     e.preventDefault();
-    if( searchInput ){
-      history.push({
-        pathname: "/search",
-        search: qs.stringify({
-          q: searchInput
-        })
+    history.push({
+      pathname: "/search",
+      search: qs.stringify({
+        q: searchInput
       })
-    }
+    })
   }
 
   return (

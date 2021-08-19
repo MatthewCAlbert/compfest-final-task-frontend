@@ -1,5 +1,5 @@
 import { rolesEnum } from '@/config/enums';
-import { EditUserRequest } from '@/services/authService';
+import { ChangePasswordRequest, EditUserRequest } from '@/services/authService';
 import { UserObject } from '@/types/redux';
 import * as types from './index';
 
@@ -37,6 +37,19 @@ export const editProfileAction = (data: EditUserRequest) => {
 export const clearEditProfileAction = () => {
   return {
     type: types.CLEAR_EDIT_USER_RESPONSE
+  }
+};
+
+export const changePasswordAction = (data: ChangePasswordRequest) => {
+  return {
+    type: types.EDIT_USER,
+    payload: data
+  }
+};
+
+export const clearChangePasswordResponse = () => {
+  return {
+    type: types.CLEAR_CHANGE_PASSWORD_RESPONSE
   }
 };
 

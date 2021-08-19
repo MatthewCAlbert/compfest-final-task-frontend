@@ -11,7 +11,8 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { useDispatch } from 'react-redux'
 import { clearTopUpUserWalletResponse, getUserWalletInfo, topUpUserWallet } from '@/redux/actions/userActions'
 import { useSelector } from '@/hooks/useReduxSelector'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { roles } from '@/config/enums'
 
 const DompetPage = () => {
   const [loading, setLoading] = useState(false);
@@ -19,14 +20,16 @@ const DompetPage = () => {
   const [selectedTopup, setSelectedTopup] = useState(-1);
   const [customTopup, setCustomTopup] = useState(20000);
 
+  const auth = useSelector((state)=> state.auth);
   const profile = useSelector((state)=> state.profile);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const topupList = [
     10000, 20000, 50000, 100000
   ]
 
   const handleTopUp = ()=>{
+    if( selectedTopup < 0 ) return toast.error("Silahkan pilih nominal topup terlebih dahulu.");
     if( customTopup < 1000 && selectedTopup === topupList.length ) return toast.error("Silahkan masukan minimal 20.000 rupiah.");
     const topupAmount = selectedTopup === topupList.length ? customTopup : topupList[selectedTopup];
     setLoading(true);
@@ -65,7 +68,7 @@ const DompetPage = () => {
         <div className="section-inner pt-4">
           <div css={css`
             border-radius: 10px;
-            background-color: ${theme.blue};
+            background-color: ${theme.darkblue};
             padding: 10px 15px;
             color: white;
           `}>
@@ -81,35 +84,44 @@ const DompetPage = () => {
       </section>
       <section className="section">
         <div className="section-inner pt-4">
-          <div css={css`
-            border-radius: 20px;
-            background-color: ${theme.darkblue};
-            padding: 20px;
-          `}>
-            <p className="fw-bold text-white">Nominal Top Up</p>
-            {
-              renderedTopupList
-            }
-            <NominalSelector active={ selectedTopup === topupList.length } value={0} setValue={()=>setSelectedTopup(topupList.length)}/>
-            {
-              selectedTopup === topupList.length && (
-                <div>
-                  <p className="fw-bold text-white mt-3">Isi Nominal Top Up</p>
-                  <input type="number" min={20000} 
-                  value={customTopup} onChange={(e)=>setCustomTopup(parseInt(e.target.value))}
-                  className="form-control" autoFocus css={css`
-                    border-radius: 15px;
-                    padding: 10px 15px;
-                  `} />
+          {
+            auth?.user?.role !== roles.fundraiser && (
+            <>
+            <div css={css`
+              border-radius: 20px;
+              background-color: ${theme.darkblue};
+              padding: 20px;
+            `}>
+              <p className="fw-bold text-white">Nominal Top Up</p>
+              {
+                renderedTopupList
+              }
+              <NominalSelector active={ selectedTopup === topupList.length } value={0} setValue={()=>setSelectedTopup(topupList.length)}/>
+              {
+                selectedTopup === topupList.length && (
                   <div>
-                    <small className="text-white mt-2 d-block">*Topup mulai dari Rp. 20.000,-</small>
+                    <p className="fw-bold text-white mt-3">Isi Nominal Top Up</p>
+                    <input type="number" min={20000} 
+                    value={customTopup} onChange={(e)=>setCustomTopup(parseInt(e.target.value))}
+                    className="form-control" autoFocus css={css`
+                      border-radius: 15px;
+                      padding: 10px 15px;
+                    `} />
+                    <div>
+                      <small className="text-white mt-2 d-block">*Topup mulai dari Rp. 20.000,-</small>
+                    </div>
                   </div>
-                </div>
-              )
-            }
-          </div>
+                )
+              }
+            </div>
+            <div>
+              <button className="btn btn-primary w-100 mt-4" onClick={handleTopUp}>Topup</button>
+            </div>
+            </>
+            )
+          }
           <div>
-            <button className="btn btn-primary w-100 mt-4" onClick={handleTopUp}>Topup</button>
+            <Link className="btn btn-primary w-100 mt-2" to="/dompet/history">Riwayat Dompet</Link>
           </div>
         </div>
       </section>

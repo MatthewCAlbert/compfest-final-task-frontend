@@ -10,11 +10,14 @@ import { clearVerifyFundraiserResponse, getPendingFundraiser, verifyFundraiser }
 import toast from 'react-hot-toast'
 import { confirmVerify } from '@/components/ConfirmVerifiy'
 import LoadingScreen from '@/components/LoadingScreen'
+import { formatDateString } from '@/utils/utils'
 
 const FundraiserItem = ({data, setLoading}: {
   data: {
     id: string,
-    status: statusEnum
+    status: statusEnum,
+    email: string,
+    date: string,
     name: string
   },
   setLoading: {(x: boolean)}
@@ -57,14 +60,18 @@ const FundraiserItem = ({data, setLoading}: {
     `} className="mb-2">
       <div className="d-flex justify-content-between">
         <div>
-          <div>Pemohon: <strong>{data.name || "undefined"}</strong></div>
+          <div>Nama: <strong>{data.name || "undefined"}</strong></div>
+          <div>Email: <strong>{data.email}</strong></div>
         </div>
         <div>
           <button className="btn btn-success" onClick={askVerify}><i className="fas fa-check"></i></button>
         </div>
       </div>
       <hr className="my-1" />
-      <div className="d-flex justify-content-end">
+      <div className="d-flex justify-content-between">
+        <div>
+          <small>{ formatDateString(data.date, "DD MMMM YYYY | HH:mm") }</small>
+        </div>
         <span className={clsx("badge", data.status === status.verified ? "bg-success" : data.status === status.unverified ? "bg-danger" : "bg-warning")}>
           {data.status === status.verified ? "Disetujui" : data.status === status.unverified ? "Ditolak" : "Menunggu Verifikasi"}
         </span>
@@ -106,6 +113,8 @@ const AdminFundraiserListPage = () => {
                 <FundraiserItem key={el.ID} setLoading={setLoading} data={{
                   id: el.ID,
                   name: el?.name,
+                  email: el?.email,
+                  date: el?.CreatedAt,
                   status: el?.status,
                 }}/>
               ))

@@ -16,6 +16,8 @@ export default ( state = initialState, action: ActionResponse )=>{
       return {...state, create: { response } }
     case types.CREATE_DONATION_PROGRAM_ERROR:
       return {...state, create: { error } }
+    case types.CLEAR_CREATE_DONATION_PROGRAM_RESPONSE:
+      return {...state, create: null }
 
     case types.FETCH_ALL_FUNDRAISER_PROGRAM_SUCCESS:
       return {...state, fundraiserProgram: { response } }
@@ -26,6 +28,8 @@ export default ( state = initialState, action: ActionResponse )=>{
       return {...state, requestWithdrawal: { response } }
     case types.CREATE_PROGRAM_WITHDRAWAL_REQUEST_ERROR:
       return {...state, requestWithdrawal: { error } }
+    case types.CLEAR_CREATE_PROGRAM_WITHDRAWAL_REQUEST_RESPONSE:
+      return {...state, requestWithdrawal: null }
 
     default:
       return state;

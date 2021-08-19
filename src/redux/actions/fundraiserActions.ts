@@ -8,6 +8,12 @@ export const createDonationProgram = (data: CreateDonationProgramRequest) => {
   }
 };
 
+export const clearCreateDonationProgramResponse = () => {
+  return {
+    type: types.CLEAR_CREATE_DONATION_PROGRAM_RESPONSE
+  }
+};
+
 export const getAllFundraiserProgram = () => {
   return {
     type: types.FETCH_ALL_FUNDRAISER_PROGRAM
@@ -21,5 +27,11 @@ export const createProgramWithdrawalRequest = (program_id: string, amount: numbe
       program_id,
       amount
     }
+  }
+};
+
+export const clearCreateProgramWithdrawalRequestResponse = () => {
+  return {
+    type: types.CLEAR_CREATE_PROGRAM_WITHDRAWAL_REQUEST_RESPONSE
   }
 };

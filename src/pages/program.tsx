@@ -19,6 +19,7 @@ import { BulletList } from 'react-content-loader'
 import { roles } from '@/config/enums'
 import LoadingScreen from '@/components/LoadingScreen'
 import ErrorPage from './ErrorPage'
+import WithdrawDonationForm from '@/components/form/WithdrawDonationForm'
 
 const DonatorItem: React.FC<{
   data: {
@@ -56,6 +57,7 @@ const ProgramPage = () => {
   const [donationProgramDetail, setDonationProgramDetail] = useState(undefined);
 
   const [donationOpen, setDonationOpen] = useState(false);
+  const [withdrawalOpen, setWithdrawalOpen] = useState(false);
   const [fetched, setFetched] = useState(false);
   const dispatch = useDispatch();
 
@@ -78,6 +80,9 @@ const ProgramPage = () => {
   if( donationOpen ){
     return <DonateProgramForm title={donationProgramDetail?.title} backCallback={()=>setDonationOpen(false)}/>
   }
+  if( withdrawalOpen ){
+    return <WithdrawDonationForm collected={donationProgramDetail?.collected} withdrawn={donationProgramDetail?.withdrawn} title={donationProgramDetail?.title} backCallback={()=>setWithdrawalOpen(false)}/>
+  }
 
   const handleOpenDonation = ()=>{
     if( auth.token )
@@ -90,6 +95,13 @@ const ProgramPage = () => {
         toast.error("Sedang memuat program, silahkan coba lagi.");
     else
       toast.error("Silahkan login terlebih dahulu.");
+  }
+
+  const handleWithdraw = ()=>{
+    if( auth?.user?.role === roles.fundraiser && donationProgramDetail?.user_id === auth?.user?.id )
+      setWithdrawalOpen(true);
+    else
+      toast.error("Hanya pemilik program yang bisa menarik dana.");
   }
 
   if(program?.programDetail?.error && fetched){
@@ -112,8 +124,9 @@ const ProgramPage = () => {
             donator: donationProgramDetail?.donations?.length,
             name: donationProgramDetail?.user?.name,
             title: donationProgramDetail?.title,
-            amount: [10000, donationProgramDetail?.amount],
-            content: donationProgramDetail?.detail
+            amount: [donationProgramDetail?.collected, donationProgramDetail?.amount],
+            content: donationProgramDetail?.detail,
+            deadline: donationProgramDetail?.deadline
           }}/>
 
           <div css={css`
@@ -125,19 +138,20 @@ const ProgramPage = () => {
                 font-size: .9em;  
               }
             `} className="mt-4 shadow">
-            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.donations?.length})</h2>
+            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.donations?.length || 0})</h2>
             <div>
               {
-                donationProgramDetail?.donations?.map((el)=>(
-                  <DonatorItem key={el?.ID} data={{
-                    name: el?.user_id,
+                donationProgramDetail?.Donation?.map((el, index)=>(
+                  <DonatorItem key={index} data={{
+                    name: el?.name,
                     donation: el?.amount,
-                    when: `${dayjsLocal(new Date()).diff(el?.CreatedAt, 'days')} hari yang lalu`
+                    when: ``
+                    // when: `${dayjsLocal(new Date()).diff(el?.CreatedAt, 'days')} hari yang lalu`
                   }}/>
                 ))
               }
               {
-                !donationProgramDetail?.donations && (
+                !donationProgramDetail?.Donation && (
                   <BulletList/>
                 )
               }
@@ -162,7 +176,14 @@ const ProgramPage = () => {
           <CopyToClipboard text={`${window.location.href}`} onCopy={()=>toast.success("Tautan berhasil disalin!")}>
             <button className="btn btn-primary">Bagikan</button>
           </CopyToClipboard>
-          <button className="btn btn-primary" onClick={handleOpenDonation}>Berdonasi</button>
+          {
+            auth?.user?.role === roles.fundraiser 
+            && donationProgramDetail?.user_id === auth?.user?.id 
+            ? 
+            <button className="btn btn-primary" onClick={handleWithdraw}>Withdraw</button>
+            :
+            <button className="btn btn-primary" onClick={handleOpenDonation}>Berdonasi</button>
+          }
         </div>
       </BottomNavTemplate>
     </Layout>

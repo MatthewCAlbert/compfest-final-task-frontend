@@ -78,7 +78,8 @@ const AdminProgramDetailPage = () => {
             name: programDetail?.user?.name,
             title: programDetail?.title,
             amount: [0,programDetail?.amount],
-            content: programDetail?.detail
+            content: programDetail?.detail,
+            deadline: programDetail?.deadline
           }} adminMode={true}/>
 
         </div>

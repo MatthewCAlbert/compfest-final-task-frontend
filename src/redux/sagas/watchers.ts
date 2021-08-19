@@ -1,7 +1,7 @@
 import { takeLatest } from "@redux-saga/core/effects";
 import * as types from '../actions';
 import { getPendingFundraiserSaga, getPendingProgramSaga, getPendingWithdrawalSaga, verifyFundraiserSaga, verifyProgramSaga, verifyWithdrawalSaga } from "./handlers/adminSaga";
-import { editUserSaga, getUserProfileSaga, loginSaga, logoutSaga, registerSaga } from "./handlers/authSaga";
+import { changePasswordSaga, editUserSaga, getUserProfileSaga, loginSaga, logoutSaga, registerSaga } from "./handlers/authSaga";
 import { createDonationProgramSaga, createProgramWithdrawalRequestSaga, getAllFundraiserProgramSaga } from "./handlers/fundraiserSaga";
 import { donateDonationProgramSaga, getDonationProgramDetailSaga, getDonationProgramListSaga, searchDonationProgramSaga } from "./handlers/programSaga";
 import { getUserDonationHistorySaga, getUserWalletHistorySaga, getUserWalletInfoSaga, topupUserWalletSaga } from "./handlers/userSaga";
@@ -12,6 +12,7 @@ export default function* watcherSaga(){
   yield takeLatest(types.LOGIN_USER, loginSaga);
   yield takeLatest(types.LOGOUT_USER, logoutSaga);
   yield takeLatest(types.EDIT_USER, editUserSaga);
+  yield takeLatest(types.CHANGE_PASSWORD, changePasswordSaga);
   yield takeLatest(types.FETCH_USER_PROFILE, getUserProfileSaga);
 
   // User
