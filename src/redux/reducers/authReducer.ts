@@ -1,4 +1,4 @@
-import { ActionResponse, UserObject } from "@/types/redux";
+import { ActionResponse, ReducerResponse, UserObject } from "@/types/redux";
 import { AxiosError } from "axios";
 import * as types from '../actions';
 
@@ -6,7 +6,8 @@ const initialState: {
   token?: string,
   response?: any,
   error?: AxiosError,
-  user?: UserObject
+  user?: UserObject,
+  edit?: ReducerResponse
 } = {
   token: ""
 } 
@@ -30,6 +31,8 @@ export default ( state = initialState, action: ActionResponse )=>{
       return { ...state, edit: {response} };
     case types.EDIT_USER_ERROR:
       return { ...state, edit: {error} };
+    case types.CLEAR_EDIT_USER_RESPONSE:
+      return { ...state, edit: null };
 
     case types.FETCH_USER_PROFILE_SUCCESS:
       return { ...state, user: response };

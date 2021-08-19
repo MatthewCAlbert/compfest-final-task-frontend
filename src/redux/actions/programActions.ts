@@ -7,6 +7,12 @@ export const searchDonationProgram = (query: string) => {
     payload: query
   }
 };
+export const clearSearchDonationProgram = () => {
+  return {
+    type: types.CLEAR_SEARCH_DONATION_PROGRAM
+  }
+};
+
 
 
 export const getDonationProgramList = () => {
@@ -21,6 +27,12 @@ export const getDonationProgramDetail = (program_id: string) => {
     payload: program_id
   }
 };
+export const clearDonationProgramDetail = () => {
+  return {
+    type: types.CLEAR_FETCH_PROGRAM_DETAIL
+  }
+};
+
 
 export const donateDonationProgram = (program_id: string, amount: number) => {
   return {

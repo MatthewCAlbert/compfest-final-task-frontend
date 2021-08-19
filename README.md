@@ -15,7 +15,7 @@
 
 ## TODO
 - [x] Auth
-- [ ] Edit Profile
+- [x] Edit Profile (left: change password)
 - [x] Public Program List
 - [x] Public Program Detail
 - [x] Public Program Donate

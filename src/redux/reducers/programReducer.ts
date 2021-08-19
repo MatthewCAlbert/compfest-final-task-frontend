@@ -17,6 +17,8 @@ export default ( state = initialState, action: ActionResponse )=>{
       return {...state, search: { response } }
     case types.SEARCH_DONATION_PROGRAM_ERROR:
       return {...state, search: { error } }
+    case types.CLEAR_SEARCH_DONATION_PROGRAM:
+      return {...state, search: null }
 
     case types.FETCH_PROGRAM_LIST_SUCCESS:
       return {...state, programList: { response } }
@@ -27,6 +29,8 @@ export default ( state = initialState, action: ActionResponse )=>{
       return {...state, programDetail: { response } }
     case types.FETCH_PROGRAM_DETAIL_ERROR:
       return {...state, programDetail: { error } }
+    case types.CLEAR_FETCH_PROGRAM_DETAIL:
+      return {...state, programDetail: null }
 
     case types.DONATE_DONATION_PROGRAM_SUCCESS:
       return {...state, sendDonation: { response } }

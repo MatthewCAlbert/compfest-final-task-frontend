@@ -34,6 +34,13 @@ export const editProfileAction = (data: EditUserRequest) => {
   }
 };
 
+export const clearEditProfileAction = () => {
+  return {
+    type: types.CLEAR_EDIT_USER_RESPONSE
+  }
+};
+
+
 export const getUserProfileAction = () => {
   return {
     type: types.FETCH_USER_PROFILE

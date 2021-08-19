@@ -13,10 +13,12 @@ import toast from 'react-hot-toast'
 import { mq, theme } from '@/config/emotion'
 import ProgramDetailTemplate from '@/components/ProgramDetailTemplate'
 import { useDispatch } from 'react-redux'
-import { getDonationProgramDetail } from '@/redux/actions/programActions'
+import { clearDonationProgramDetail, getDonationProgramDetail } from '@/redux/actions/programActions'
 import dayjsLocal from '@/utils/dayjsLocal'
 import { BulletList } from 'react-content-loader'
 import { roles } from '@/config/enums'
+import LoadingScreen from '@/components/LoadingScreen'
+import ErrorPage from './ErrorPage'
 
 const DonatorItem: React.FC<{
   data: {
@@ -54,15 +56,22 @@ const ProgramPage = () => {
   const [donationProgramDetail, setDonationProgramDetail] = useState(undefined);
 
   const [donationOpen, setDonationOpen] = useState(false);
+  const [fetched, setFetched] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    console.log(program)
-    if( !program?.programDetail && id ){
-      dispatch(getDonationProgramDetail(id))
+    if( id ){
+      dispatch(clearDonationProgramDetail());
+      dispatch(getDonationProgramDetail(id));
+      setFetched(true);
     }
-    if( program?.programDetail?.response?.data ){
+  }, [id])
+
+  useEffect(()=>{
+    if( program?.programDetail?.response?.data && fetched ){
       setDonationProgramDetail(program?.programDetail?.response?.data);
+    }else if( program?.programDetail?.error && fetched ){
+      console.log("not found")
     }
   }, [program, id])
 
@@ -83,11 +92,18 @@ const ProgramPage = () => {
       toast.error("Silahkan login terlebih dahulu.");
   }
 
+  if(program?.programDetail?.error && fetched){
+    return (
+      <ErrorPage message="Program Donasi Tidak Dapat Ditemukan" useBack={true}/>
+    )
+  }
+
   return (
     <>
     <SEO title={ donationProgramDetail?.title || "Program Donasi"}/>
     <Layout enableNav={false}>
       <Header simpleBack={true}/>
+      <LoadingScreen show={donationProgramDetail ? false: true}/>
       <section className="section">
         <div className="section-inner pt-4">
 

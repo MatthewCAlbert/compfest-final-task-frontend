@@ -11,7 +11,7 @@ import PublicRoute from "@/routes/PublicRoute";
 /* Config */
 import {privateRoute, publicRoute} from './config/route';
 import PrivateRoute from './routes/ProtectedRoute';
-import Page404 from './pages/404';
+import Page404 from './pages/ErrorPage';
 import { Toaster } from 'react-hot-toast';
 
 const App: React.FC = ()=>{

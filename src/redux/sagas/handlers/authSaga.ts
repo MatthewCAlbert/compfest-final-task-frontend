@@ -44,8 +44,8 @@ export function* loginSaga(payload: PayloadAction<LoginUserRequest>) {
 export function* editUserSaga(payload: PayloadAction<EditUserRequest>) {
   try {
     const response: AxiosResponse = yield call(editUserProfileService, payload.payload);
-    const {data} = response;
-    yield put({ type: types.EDIT_USER_SUCCESS, response: data.token });
+    const { data } = response;
+    yield put({ type: types.EDIT_USER_SUCCESS, response: data });
   } catch(error) {
     yield put({ type: types.EDIT_USER_ERROR, error });
   }

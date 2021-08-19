@@ -35,7 +35,7 @@ export interface EditUserRequest{
 
 export function editUserProfileService( editData: EditUserRequest) {
   const mutator = ()=>{
-    return apiInstance.put("auth/user", editData);
+    return apiInstance.put("api/user", editData);
   }
 
   return mutator();
