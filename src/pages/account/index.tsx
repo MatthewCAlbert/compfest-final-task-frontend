@@ -2,17 +2,18 @@ import React from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { css } from '@emotion/react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logoutAction } from '@/redux/actions/authActions'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { theme } from '@/config/emotion'
+import { capitalizeFirstLetter } from '@/utils/utils'
+import { roles } from '@/config/enums'
 
 const AccountPage = () => {
   const dispatch = useDispatch();
 
-  const auth = useSelector((state)=> state.auth);
-  if( !auth.token ) return <Redirect to="/login"/>;
+  const user = useSelector((state)=> state.auth?.user);
   
   const handleLogout = ()=>{
     dispatch(logoutAction());
@@ -33,8 +34,8 @@ const AccountPage = () => {
 
             </div>
             <div className="ms-3">
-              <span className="d-block h4 mb-0">Budi Wijaya</span>
-              <span className="d-block h6">Role</span>
+              <span className="d-block h4 mb-0">{user?.name}</span>
+              <span className="d-block h6">{capitalizeFirstLetter(user?.role)}</span>
             </div>
           </div>
           <div className="d-flex flex-column mt-5" css={css`
@@ -52,8 +53,16 @@ const AccountPage = () => {
           `}>
             <Link to="/account/edit">Edit Profil</Link>
             <Link to="/account/change-password">Ganti Password</Link>
-            <Link to="/donation/history">Donasi Saya</Link>
-            <Link to="/fundraiser/program/">Penggalangan Dana Saya</Link>
+            {
+              user?.role === roles.fundraiser && (
+                <Link to="/fundraiser/program/">Penggalangan Dana Saya</Link>
+              )
+            }
+            {
+              user?.role === roles.donor && (
+                <Link to="/donation/history">Donasi Saya</Link>
+              )
+            }
             <a className="cursor-pointer" onClick={handleLogout}>Keluar</a>
           </div>
         </div>

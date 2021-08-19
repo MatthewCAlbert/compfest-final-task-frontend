@@ -22,6 +22,7 @@ const Layout: React.FC<{
     <main css={css`
       flex-grow: 1;
       min-height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;

@@ -57,6 +57,7 @@ export function* getUserProfileSaga() {
     const {data: res} = response;
     if( res?.data ){
       const {data} = res;
+      authContext.setUser(data);
       yield put({ type: types.FETCH_USER_PROFILE_SUCCESS, response: data });
     }else new Error();
   } catch(error) {
@@ -65,6 +66,6 @@ export function* getUserProfileSaga() {
 }
 
 export function* logoutSaga() {
-  authContext.setToken("");
+  authContext.logoutUser();
   yield put({ type: types.LOGOUT_USER_SUCCESS, response: "ok" });
 }

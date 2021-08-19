@@ -5,6 +5,7 @@ const initialState: {
   wallet?: ReducerResponse,
   walletHistory?: ReducerResponse,
   donationHistory?: ReducerResponse,
+  topUp?: ReducerResponse,
 } = {}
 
 export default ( state = initialState, action: ActionResponse )=>{
@@ -26,6 +27,13 @@ export default ( state = initialState, action: ActionResponse )=>{
       return {...state, donationHistory: { response } }
     case types.FETCH_USER_DONATION_HISTORY_ERROR:
       return {...state, donationHistory: { error } }
+      
+    case types.TOPUP_USER_WALLET_SUCCESS:
+      return {...state, topUp: { response } }
+    case types.TOPUP_USER_WALLET_ERROR:
+      return {...state, topUp: { error } }
+    case types.CLEAR_TOPUP_USER_WALLET_RESPONSE:
+      return {...state, topUp: null }
       
     default:
       return state;

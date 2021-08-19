@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import Header from '@/components/layouts/Header'
@@ -7,10 +7,20 @@ import { formatNumber } from '@/utils/utils'
 import toast from 'react-hot-toast'
 import NominalSelector from '@/components/form/NominalSelector'
 import { theme } from '@/config/emotion'
+import LoadingScreen from '@/components/LoadingScreen'
+import { useDispatch } from 'react-redux'
+import { clearTopUpUserWalletResponse, getUserWalletInfo, topUpUserWallet } from '@/redux/actions/userActions'
+import { useSelector } from '@/hooks/useReduxSelector'
+import { Redirect } from 'react-router-dom'
 
 const DompetPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [topUpDone, setTopUpDone] = useState(false);
   const [selectedTopup, setSelectedTopup] = useState(-1);
   const [customTopup, setCustomTopup] = useState(20000);
+
+  const profile = useSelector((state)=> state.profile);
+  const dispatch = useDispatch();
 
   const topupList = [
     10000, 20000, 50000, 100000
@@ -18,7 +28,25 @@ const DompetPage = () => {
 
   const handleTopUp = ()=>{
     if( customTopup < 1000 && selectedTopup === topupList.length ) return toast.error("Silahkan masukan minimal 20.000 rupiah.");
+    const topupAmount = selectedTopup === topupList.length ? customTopup : topupList[selectedTopup];
+    setLoading(true);
+    dispatch(topUpUserWallet(topupAmount));
   }
+
+  useEffect(()=>{
+    if( profile.topUp?.response ){
+      toast.success("Berhasil Top Up!");
+      dispatch(getUserWalletInfo());
+      setTopUpDone(true);
+    }
+    if( profile.topUp?.error ){
+      toast.error(profile.topUp?.error?.response?.data?.message);
+    }
+    if( profile.topUp ){
+      setLoading(false);
+      dispatch(clearTopUpUserWalletResponse());
+    }
+  },[profile.topUp]);
 
   const renderedTopupList = useMemo(()=>{
     return topupList.map((el,index)=>(
@@ -26,8 +54,11 @@ const DompetPage = () => {
     ))
   }, [selectedTopup])
 
+  if( topUpDone ) return <Redirect to="/"/>
+
   return (
     <Layout enableHeader={false}>
+      <LoadingScreen show={loading}/>
       <Header customTitle="eWallet Saya" simpleBack={true}/>
       <SEO title="Dompet Saya"/>
       <section className="section">
@@ -43,7 +74,7 @@ const DompetPage = () => {
             </h2>
             <div>
               <i className="fas fa-wallet me-3"></i>
-              <span>Rp. {formatNumber(1000000)},-</span>
+              <span>Rp. {formatNumber(profile?.wallet?.response || 0)},-</span>
             </div>
           </div>
         </div>

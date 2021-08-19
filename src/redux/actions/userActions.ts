@@ -17,3 +17,16 @@ export const getUserWalletHistory = () => {
     type: types.FETCH_USER_WALLET_HISTORY
   }
 };
+
+export const topUpUserWallet = (amount: number) => {
+  return {
+    type: types.TOPUP_USER_WALLET,
+    payload: amount
+  }
+};
+
+export const clearTopUpUserWalletResponse = () => {
+  return {
+    type: types.CLEAR_TOPUP_USER_WALLET_RESPONSE
+  }
+};

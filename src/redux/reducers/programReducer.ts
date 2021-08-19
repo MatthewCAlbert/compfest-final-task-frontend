@@ -33,6 +33,9 @@ export default ( state = initialState, action: ActionResponse )=>{
     case types.DONATE_DONATION_PROGRAM_ERROR:
       return {...state, sendDonation: { error } }
 
+    case types.CLEAR_DONATE_DONATION_PROGRAM_RESPONSE:
+      return {...state, sendDonation: null }
+
     default:
       return state;
   }

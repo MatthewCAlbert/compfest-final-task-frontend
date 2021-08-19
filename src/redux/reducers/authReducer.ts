@@ -37,7 +37,7 @@ export default ( state = initialState, action: ActionResponse )=>{
       return { ...state, error };
 
     case types.LOGOUT_USER_SUCCESS:
-      return { ...state, token: "" };
+      return { ...state, token: null, user: null };
 
     case types.CLEAR_AUTH_RESPONSE:
       return { ...state, error: null, response: null };

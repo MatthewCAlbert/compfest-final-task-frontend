@@ -1,21 +1,33 @@
+import { useSelector } from '@/hooks/useReduxSelector';
+import { clearDonateDonationProgramResponse, donateDonationProgram } from '@/redux/actions/programActions';
+import { getUserWalletInfo } from '@/redux/actions/userActions';
 import { formatNumber } from '@/utils/utils';
 import { css } from '@emotion/react';
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useMemo } from 'react';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Redirect, useParams } from 'react-router-dom';
 import BottomNavTemplate from '../layouts/BottomNavTemplate';
 import Header from '../layouts/Header';
 import Layout from '../layouts/Layout';
+import LoadingScreen from '../LoadingScreen';
 import NominalSelector from './NominalSelector';
 
 const DonateProgramForm: React.FC<{
+  title: string,
   backCallback: {()}
 }> = ({
+  title,
   backCallback
 }) => {
   const {id} = useParams<{id: string}>();
+  const program = useSelector((state)=> state.program);
+  const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(false);
+  const [donationDone, setDonationDone] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(-1);
   const [customDonation, setCustomDonation] = useState(1000);
 
@@ -25,7 +37,25 @@ const DonateProgramForm: React.FC<{
 
   const handleDonate = ()=>{
     if( customDonation < 1000 && selectedDonation === donationList.length ) return toast.error("Silahkan masukan minimal 1000 rupiah.");
+    const donateAmount = selectedDonation === donationList.length ? customDonation : donationList[selectedDonation];
+    setLoading(true);
+    dispatch(donateDonationProgram(id, donateAmount));
   }
+
+  useEffect(()=>{
+    if( program.sendDonation?.response ){
+      toast.success("Berhasil Berdonasi!");
+      dispatch(getUserWalletInfo());
+      setDonationDone(true);
+    }
+    if( program.sendDonation?.error ){
+      toast.error(program.sendDonation?.error?.response?.data?.message);
+    }
+    if( program.sendDonation ){
+      setLoading(false);
+      dispatch(clearDonateDonationProgramResponse());
+    }
+  },[program.sendDonation]);
 
   const renderedDonationList = useMemo(()=>{
     return donationList.map((el,index)=>(
@@ -33,9 +63,12 @@ const DonateProgramForm: React.FC<{
     ))
   }, [selectedDonation])
 
+  if( donationDone ) return <Redirect to="/"/>
+
   return (
     <Layout enableNav={false}>
-      <Header simpleBack={true} customTitle="Ini Judul" customCallback={backCallback}/>
+      <LoadingScreen show={loading}/>
+      <Header simpleBack={true} customTitle={title} customCallback={backCallback}/>
       <section className="section">
         <div className="section-inner pt-4">
           <div css={css`

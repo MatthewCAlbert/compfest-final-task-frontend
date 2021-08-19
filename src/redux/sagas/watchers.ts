@@ -4,7 +4,7 @@ import { getPendingFundraiserSaga, getPendingProgramSaga, getPendingWithdrawalSa
 import { editUserSaga, getUserProfileSaga, loginSaga, logoutSaga, registerSaga } from "./handlers/authSaga";
 import { createDonationProgramSaga, createProgramWithdrawalRequestSaga, getAllFundraiserProgramSaga } from "./handlers/fundraiserSaga";
 import { donateDonationProgramSaga, getDonationProgramDetailSaga, getDonationProgramListSaga, searchDonationProgramSaga } from "./handlers/programSaga";
-import { getUserDonationHistorySaga, getUserWalletHistorySaga, getUserWalletInfoSaga } from "./handlers/userSaga";
+import { getUserDonationHistorySaga, getUserWalletHistorySaga, getUserWalletInfoSaga, topupUserWalletSaga } from "./handlers/userSaga";
 
 export default function* watcherSaga(){
   // Auth
@@ -18,6 +18,7 @@ export default function* watcherSaga(){
   yield takeLatest(types.FETCH_USER_DONATION_HISTORY, getUserDonationHistorySaga);
   yield takeLatest(types.FETCH_USER_WALLET_INFO, getUserWalletInfoSaga);
   yield takeLatest(types.FETCH_USER_WALLET_HISTORY, getUserWalletHistorySaga);
+  yield takeLatest(types.TOPUP_USER_WALLET, topupUserWalletSaga);
 
   // Program
   yield takeLatest(types.SEARCH_DONATION_PROGRAM, searchDonationProgramSaga);

@@ -31,3 +31,9 @@ export const donateDonationProgram = (program_id: string, amount: number) => {
     }
   }
 };
+
+export const clearDonateDonationProgramResponse = () => {
+  return {
+    type: types.CLEAR_DONATE_DONATION_PROGRAM_RESPONSE
+  }
+};

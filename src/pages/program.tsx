@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import { css } from '@emotion/react'
@@ -12,6 +12,11 @@ import { useSelector } from '@/hooks/useReduxSelector'
 import toast from 'react-hot-toast'
 import { mq, theme } from '@/config/emotion'
 import ProgramDetailTemplate from '@/components/ProgramDetailTemplate'
+import { useDispatch } from 'react-redux'
+import { getDonationProgramDetail } from '@/redux/actions/programActions'
+import dayjsLocal from '@/utils/dayjsLocal'
+import { BulletList } from 'react-content-loader'
+import { roles } from '@/config/enums'
 
 const DonatorItem: React.FC<{
   data: {
@@ -44,34 +49,55 @@ const DonatorItem: React.FC<{
 const ProgramPage = () => {
   const {id} = useParams<{id: string}>();
   const auth = useSelector((state)=> state.auth);
+  const program = useSelector((state)=> state.program);
+
+  const [donationProgramDetail, setDonationProgramDetail] = useState(undefined);
+
   const [donationOpen, setDonationOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log(program)
+    if( !program?.programDetail && id ){
+      dispatch(getDonationProgramDetail(id))
+    }
+    if( program?.programDetail?.response?.data ){
+      setDonationProgramDetail(program?.programDetail?.response?.data);
+    }
+  }, [program, id])
 
   if( donationOpen ){
-    return <DonateProgramForm backCallback={()=>setDonationOpen(false)}/>
+    return <DonateProgramForm title={donationProgramDetail?.title} backCallback={()=>setDonationOpen(false)}/>
   }
 
   const handleOpenDonation = ()=>{
     if( auth.token )
-      setDonationOpen(true);
+      if( donationProgramDetail )
+        if( auth.user?.role === roles.donor )
+          setDonationOpen(true);
+        else
+          toast.error("Hanya Donor yang bisa berdonasi.");
+      else
+        toast.error("Sedang memuat program, silahkan coba lagi.");
     else
       toast.error("Silahkan login terlebih dahulu.");
   }
 
   return (
     <>
-    <SEO title="Program"/>
+    <SEO title={ donationProgramDetail?.title || "Program Donasi"}/>
     <Layout enableNav={false}>
       <Header simpleBack={true}/>
       <section className="section">
         <div className="section-inner pt-4">
 
           <ProgramDetailTemplate data={{
-            id: "32",
-            donator: 20,
-            name: "John Doe",
-            title: "Bantu Saya Beli PS5",
-            amount: [10000,20000],
-            content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto exercitationem et ea, est in delectus, earum tempore ullam expedita voluptatum distinctio! Recusandae corrupti fuga aliquid libero! Veritatis ab amet excepturi."
+            id: donationProgramDetail?.ID,
+            donator: donationProgramDetail?.donations?.length,
+            name: donationProgramDetail?.user?.name,
+            title: donationProgramDetail?.title,
+            amount: [10000, donationProgramDetail?.amount],
+            content: donationProgramDetail?.detail
           }}/>
 
           <div css={css`
@@ -83,23 +109,22 @@ const ProgramPage = () => {
                 font-size: .9em;  
               }
             `} className="mt-4 shadow">
-            <h2 className="h5 fw-bold mb-3">Para Donatur (10)</h2>
+            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.donations?.length})</h2>
             <div>
-              <DonatorItem data={{
-                name: "Budi",
-                donation: 20000,
-                when: "2 jam yang lalu"
-              }}/>
-              <DonatorItem data={{
-                name: "Budi",
-                donation: 20000,
-                when: "2 jam yang lalu"
-              }}/>
-              <DonatorItem data={{
-                name: "Budi",
-                donation: 20000,
-                when: "2 jam yang lalu"
-              }}/>
+              {
+                donationProgramDetail?.donations?.map((el)=>(
+                  <DonatorItem key={el?.ID} data={{
+                    name: el?.user_id,
+                    donation: el?.amount,
+                    when: `${dayjsLocal(new Date()).diff(el?.CreatedAt, 'days')} hari yang lalu`
+                  }}/>
+                ))
+              }
+              {
+                !donationProgramDetail?.donations && (
+                  <BulletList/>
+                )
+              }
               <div>
                 <small>*Hanya data terbaru yang ditampilkan.</small>
               </div>

@@ -17,7 +17,7 @@ import LoginPage from "@/pages/login";
 import ProgramPage from "@/pages/program";
 import RegisterPage from "@/pages/register";
 import SearchPage from "@/pages/search";
-import { rolesEnum } from "./enums";
+import { roles, rolesEnum } from "./enums";
 
 interface RouteItemInterface{
   menu: {
@@ -103,6 +103,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/fundme",
+    requiredRoles: [roles.fundraiser],
     component: AddFundraisingProgramPage,
     exact: true
   },
@@ -148,6 +149,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/donation/history",
+    requiredRoles: [roles.donor],
     component: DonationHistoryPage,
     exact: true
   },
@@ -157,6 +159,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/admin",
+    requiredRoles: [roles.admin],
     component: AdminPage,
     exact: true
   },
@@ -166,6 +169,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/admin/program",
+    requiredRoles: [roles.admin],
     component: AdminProgramListPage,
     exact: true
   },
@@ -175,6 +179,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/admin/withdrawal",
+    requiredRoles: [roles.admin],
     component: AdminWithdrawalListPage,
     exact: true
   },
@@ -184,7 +189,18 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/admin/fundraiser",
+    requiredRoles: [roles.admin],
     component: AdminFundraiserListPage,
+    exact: true
+  },
+  {
+    menu: {
+      name: "Admin Fundraiser Program Detail",
+      icon: "",
+    },
+    path: "/fundraiser/program/:id",
+    requiredRoles: [roles.admin],
+    component: AdminProgramDetailPage,
     exact: true
   },
   {
@@ -193,16 +209,8 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/fundraiser/program",
+    requiredRoles: [roles.fundraiser],
     component: FundraiserProgramListPage,
-    exact: true
-  },
-  {
-    menu: {
-      name: "Fundraiser Program Detail",
-      icon: "",
-    },
-    path: "/fundraiser/program/:id",
-    component: AdminProgramDetailPage,
     exact: true
   },
 ];

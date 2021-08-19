@@ -13,6 +13,26 @@
 - SWR
 - JS Cookie
 
+## TODO
+- [x] Auth
+- [ ] Edit Profile
+- [x] Public Program List
+- [x] Public Program Detail
+- [x] Public Program Donate
+- [x] Top Up
+- [x] Wallet History
+- [x] Donation History
+- [ ] Fundraiser: Create New Program
+- [ ] Fundraiser: My Program List 
+- [ ] Fundraiser: My Program Detail 
+- [ ] Fundraiser: My Program Withdraw 
+- [ ] Admin: Pending User 
+- [ ] Admin: Pending Program 
+- [ ] Admin: Pending Withdrawal 
+- [ ] Admin: Verify User 
+- [ ] Admin: Verify Program 
+- [ ] Admin: Verify Withdrawal 
+
 ## Docker Info
 - Build on NodeJs v12 Alpine
 - Running on Nginx Latest Alpine

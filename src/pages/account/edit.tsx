@@ -10,6 +10,7 @@ import Input from '@/components/form/Input'
 import toast from 'react-hot-toast'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { theme } from '@/config/emotion'
+import { capitalizeFirstLetter } from '@/utils/utils'
 
 const EditProfilePage = () => {
   const dispatch = useDispatch();
@@ -46,8 +47,8 @@ const EditProfilePage = () => {
 
             </div>
             <div className="mt-3 text-center">
-              <span className="d-block h3 mb-1">Budi Wijaya</span>
-              <span className="d-block h5">Role</span>
+              <span className="d-block h3 mb-1">{user?.name}</span>
+              <span className="d-block h5">{capitalizeFirstLetter(user?.role)}</span>
             </div>
           </div>
 

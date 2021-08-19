@@ -1,5 +1,6 @@
 import { authContext } from "@/utils/auth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 let baseURL = process.env.REACT_APP_ENDPOINT_URL;
 
@@ -25,6 +26,13 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   res => res,
   err => {
+    if( err?.response?.status === 401 ){
+      // authContext.logoutUser();
+      // toast.error("Sesi Habis!");
+      // setTimeout(()=>{
+      //   window.location.replace("/login");
+      // },1000);
+    }
     return Promise.reject(err);
   }
 );

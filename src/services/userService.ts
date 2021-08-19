@@ -10,7 +10,7 @@ export function getUserProfileService() {
 
 export function getUserDonationHistoryService() {
   const fetcher = ()=>{
-    return apiInstance.get("api/donate/history");
+    return apiInstance.get("api/donation/history");
   }
 
   return fetcher();
@@ -32,9 +32,9 @@ export function getUserWalletHistoryService() {
   return fetcher();
 }
 
-export function topUpService() {
+export function topUpService( amount: number ) {
   const mutator = ()=>{
-    return apiInstance.post(`api/wallet`);
+    return apiInstance.post(`api/wallet`, { amount });
   }
 
   return mutator();

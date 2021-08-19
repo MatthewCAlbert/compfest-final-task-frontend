@@ -12,20 +12,14 @@ import PublicRoute from "@/routes/PublicRoute";
 import {privateRoute, publicRoute} from './config/route';
 import PrivateRoute from './routes/ProtectedRoute';
 import Page404 from './pages/404';
-import { useSelector } from './hooks/useReduxSelector';
 import { Toaster } from 'react-hot-toast';
 
 const App: React.FC = ()=>{
-  const auth = useSelector((state)=> state.auth);
-
   const generatePrivateRoute = () => {
     return privateRoute.map((entry, idx) => {
-      const current_role = auth?.user?.role;
-
-      if( !entry.requiredRoles || entry?.requiredRoles?.length < 1 || entry?.requiredRoles?.includes(current_role) )
-        return (
-          <PrivateRoute exact={entry.exact} key={idx} path={entry.path} Component={entry.component} />
-        );
+      return (
+        <PrivateRoute requiredRoles={entry?.requiredRoles || []} exact={entry.exact} key={idx} path={entry.path} Component={entry.component} />
+      );
     });
   }
 

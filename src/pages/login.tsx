@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
-import { clearAuthAction, loginUserAction } from '@/redux/actions/authActions'
+import { clearAuthAction, getUserProfileAction, loginUserAction } from '@/redux/actions/authActions'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import Input from '@/components/form/Input'
@@ -21,12 +21,16 @@ const LoginPage = () => {
     if( auth?.error ){
       toast.error(auth.error?.message);
       dispatch(clearAuthAction());
+      setLoading(false);
     }
-    if( auth?.response ){
+    if( auth?.response && !auth?.user ){
+      dispatch(getUserProfileAction());
+    }
+    if( auth?.response && auth?.user ){
       toast.success("Login berhasil!");
       dispatch(clearAuthAction());
+      setLoading(false);
     }
-    setLoading(false);
   }, [auth])
 
   const handleLogin = (data)=>{
@@ -40,7 +44,7 @@ const LoginPage = () => {
     handleSubmit
   } = useForm();
 
-  if( auth?.token ) return <Redirect to={state?.from || "/"}/>;
+  if( auth?.token && auth?.user ) return <Redirect to={state?.from || "/"}/>;
 
   return (
     <Layout>
