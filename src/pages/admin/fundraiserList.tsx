@@ -11,6 +11,8 @@ import toast from 'react-hot-toast'
 import { confirmVerify } from '@/components/ConfirmVerifiy'
 import LoadingScreen from '@/components/LoadingScreen'
 import { formatDateString } from '@/utils/utils'
+import Skeleton from '@/components/Skeleton'
+import { theme } from '@/config/emotion'
 
 const FundraiserItem = ({data, setLoading}: {
   data: {
@@ -55,7 +57,7 @@ const FundraiserItem = ({data, setLoading}: {
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: lightgrey;
+      background-color: ${theme.lightblue};
       padding: 15px;
     `} className="mb-2">
       <div className="d-flex justify-content-between">
@@ -103,6 +105,9 @@ const AdminFundraiserListPage = () => {
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Daftar Fundraiser</h1>
           <div>
+            {
+              !admin?.pendingFundraiser?.response && <Skeleton/>
+            }
             {
               admin?.pendingFundraiser?.response?.data?.length < 1 && (
                 <p>Tidak ada penggalang dana yang belum diverifikasi.</p>

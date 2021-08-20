@@ -1,5 +1,11 @@
 import * as types from './index';
 
+export const getAdminNotification = () => {
+  return {
+    type: types.FETCH_ADMIN_NOTIFICATIONS,
+  }
+};
+
 export const verifyFundraiser = (user_id: string) => {
   return {
     type: types.VERIFY_FUNDRAISER,

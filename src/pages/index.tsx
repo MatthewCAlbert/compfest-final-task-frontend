@@ -2,6 +2,7 @@ import MainHeroCarousel from '@/components/landing/MainHeroCarousel'
 import Layout from '@/components/layouts/Layout'
 import SEO from '@/components/layouts/SEO'
 import ProgramItem from '@/components/ProgramItem'
+import Skeleton from '@/components/Skeleton'
 import { theme } from '@/config/emotion'
 import { roles } from '@/config/enums'
 import { useSelector } from '@/hooks/useReduxSelector'
@@ -87,6 +88,9 @@ const IndexPage = () => {
         <div className="section-inner">
           <h2 className="mt-5 text-start w-100 h3">Terbaru</h2>
           <div>
+            {
+              !program.programList?.response && <Skeleton/>
+            }
             {
               program.programList?.response?.data?.map((el,id)=>(
                 <ProgramItem key={el.id} data={{

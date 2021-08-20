@@ -2,6 +2,7 @@ import { ActionResponse, ReducerResponse } from "@/types/redux";
 import * as types from '../actions';
 
 const initialState: {
+  adminNotification?: ReducerResponse,
   verifyFundraiser?: ReducerResponse,
   pendingFundraiser?: ReducerResponse,
   verifyProgram?: ReducerResponse,
@@ -15,6 +16,11 @@ export default ( state = initialState, action: ActionResponse )=>{
   const error = action?.error;
 
   switch( action.type ){
+    case types.FETCH_ADMIN_NOTIFICATIONS_SUCCESS:
+      return {...state, adminNotification: { response } }
+    case types.FETCH_ADMIN_NOTIFICATIONS_ERROR:
+      return {...state, adminNotification: { error } }
+
     case types.VERIFY_FUNDRAISER_SUCCESS:
       return {...state, verifyFundraiser: { response } }
     case types.VERIFY_FUNDRAISER_ERROR:

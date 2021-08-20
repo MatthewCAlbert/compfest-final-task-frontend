@@ -9,6 +9,7 @@ import { theme } from '@/config/emotion'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { useDispatch } from 'react-redux'
 import { getAllFundraiserProgram } from '@/redux/actions/fundraiserActions'
+import Skeleton from '@/components/Skeleton'
 
 const ProgramItem = ({data}: {
   data: {
@@ -59,6 +60,9 @@ const FundraiserProgramListPage = () => {
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Program Saya</h1>
           <div>
+            {
+              !fundraiser?.fundraiserProgram?.response && <Skeleton/>
+            }
             {
               fundraiser?.fundraiserProgram?.response?.data?.length < 1 && (
                 <p>Anda belum memiliki program apapun.

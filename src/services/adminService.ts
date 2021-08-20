@@ -1,5 +1,13 @@
 import apiInstance from "@/config/api";
 
+export function getAdminNotificationService() {
+  const fetcher = ()=>{
+    return apiInstance.get(`api/admin/unverified`);
+  }
+
+  return fetcher();
+}
+
 export function verifyFundraiserService( user_id: string ) {
   const mutator = ()=>{
     return apiInstance.put(`api/user/verify/${user_id}`);

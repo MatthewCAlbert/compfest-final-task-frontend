@@ -2,7 +2,17 @@ import { put, call } from 'redux-saga/effects';
 import * as types from '@/redux/actions'
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { getPendingFundraiserService, getPendingProgramService, getPendingWithdrawalService, verifyFundraiserService, verifyProgramService, verifyWithdrawalService } from '@/services/adminService';
+import { getAdminNotificationService, getPendingFundraiserService, getPendingProgramService, getPendingWithdrawalService, verifyFundraiserService, verifyProgramService, verifyWithdrawalService } from '@/services/adminService';
+
+export function* getAdminNotificationSaga() {
+  try {
+    const response: AxiosResponse = yield call(getAdminNotificationService);
+    const {data} = response;
+    yield put({ type: types.FETCH_ADMIN_NOTIFICATIONS_SUCCESS, response: data });
+  } catch(error) {
+    yield put({ type: types.FETCH_ADMIN_NOTIFICATIONS_ERROR, error });
+  }
+}
 
 export function* verifyFundraiserSaga(payload: PayloadAction<string>) {
   try {

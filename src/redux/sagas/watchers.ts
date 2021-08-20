@@ -1,6 +1,6 @@
 import { takeLatest } from "@redux-saga/core/effects";
 import * as types from '../actions';
-import { getPendingFundraiserSaga, getPendingProgramSaga, getPendingWithdrawalSaga, verifyFundraiserSaga, verifyProgramSaga, verifyWithdrawalSaga } from "./handlers/adminSaga";
+import { getAdminNotificationSaga, getPendingFundraiserSaga, getPendingProgramSaga, getPendingWithdrawalSaga, verifyFundraiserSaga, verifyProgramSaga, verifyWithdrawalSaga } from "./handlers/adminSaga";
 import { changePasswordSaga, editUserSaga, getUserProfileSaga, loginSaga, logoutSaga, registerSaga } from "./handlers/authSaga";
 import { createDonationProgramSaga, createProgramWithdrawalRequestSaga, getAllFundraiserProgramSaga } from "./handlers/fundraiserSaga";
 import { donateDonationProgramSaga, getDonationProgramDetailSaga, getDonationProgramListSaga, searchDonationProgramSaga } from "./handlers/programSaga";
@@ -33,6 +33,7 @@ export default function* watcherSaga(){
   yield takeLatest(types.CREATE_PROGRAM_WITHDRAWAL_REQUEST, createProgramWithdrawalRequestSaga);
   
   // Admin
+  yield takeLatest(types.FETCH_ADMIN_NOTIFICATIONS, getAdminNotificationSaga);
   yield takeLatest(types.VERIFY_FUNDRAISER, verifyFundraiserSaga);
   yield takeLatest(types.FETCH_PENDING_FUNDRAISER, getPendingFundraiserSaga);
   yield takeLatest(types.VERIFY_PROGRAM, verifyProgramSaga);

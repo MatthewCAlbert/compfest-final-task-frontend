@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { useEffect } from 'react'
 import { getPendingProgram } from '@/redux/actions/adminActions'
+import Skeleton from '@/components/Skeleton'
+import { theme } from '@/config/emotion'
 
 const ProgramItem = ({data}: {
   data: {
@@ -22,7 +24,7 @@ const ProgramItem = ({data}: {
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: lightgrey;
+      background-color: ${theme.lightblue};
       padding: 15px;
     `} className="mb-2">
       <div>
@@ -58,6 +60,9 @@ const AdminProgramListPage = () => {
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Daftar Program</h1>
           <div>
+            {
+              !admin?.pendingProgram?.response && <Skeleton/>
+            }
             {
               admin?.pendingProgram?.response?.data?.length < 1 && (
                 <p>Tidak ada program yang belum diverifikasi.</p>

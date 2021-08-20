@@ -8,6 +8,7 @@ import { theme } from '@/config/emotion'
 import { useDispatch } from 'react-redux'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { getUserWalletHistory } from '@/redux/actions/userActions'
+import Skeleton from '@/components/Skeleton'
 
 const DompetHistoryItem = ({data}: {
   data: {
@@ -55,6 +56,9 @@ const DompetHistoryPage = () => {
       <SEO title="Riwayat Dompet"/>
       <section className="section">
         <div className="section-inner pt-4">
+          {
+            !profile?.walletHistory?.response && <Skeleton/>
+          }
           {
             profile?.walletHistory?.response?.data?.map((el)=>(
               <DompetHistoryItem key={el.ID} data={{

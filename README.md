@@ -25,7 +25,7 @@
 - [x] Top Up
 - [x] Wallet History
 - [x] Donation History
-- [ ] Inbox (tolong diisi)
+- [x] Inbox
 - [x] Fundraiser: Create New Program
 - [x] Fundraiser: My Program List 
 - [x] Fundraiser: My Program Detail (left: testing)

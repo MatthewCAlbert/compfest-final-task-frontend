@@ -48,7 +48,11 @@ const Nav = () => {
         {
           auth?.token && (
             auth?.user?.role === roles.admin ?
-            <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/> :
+            <>
+            <NavLink href="/admin" title="Dasbor" icon="fas fa-columns"/> 
+            <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/> 
+            </>
+            :
             <NavLink href="/dompet" title="Dompet" icon="fas fa-wallet"/>
           )
         }

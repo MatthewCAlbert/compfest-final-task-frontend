@@ -13,6 +13,8 @@ import { css } from '@emotion/react'
 import toast from 'react-hot-toast'
 import { formatDateString, formatNumber } from '@/utils/utils'
 import { confirmVerify } from '@/components/ConfirmVerifiy'
+import Skeleton from '@/components/Skeleton'
+import { theme } from '@/config/emotion'
 
 const WithdrawalRequestItem = ({data, setLoading}: {
   data: {
@@ -58,7 +60,7 @@ const WithdrawalRequestItem = ({data, setLoading}: {
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: lightgrey;
+      background-color: ${theme.lightblue};
       padding: 15px;
       font-size: .9em;
     `} className="mb-2">
@@ -109,6 +111,9 @@ const AdminWithdrawalListPage = () => {
       <section className="section">
         <div className="section-inner pt-4 d-flex flex-column">
           <h1 className="h3 mb-3">Daftar Penarikan</h1>
+            {
+              !admin?.pendingWithdrawal?.response && <Skeleton/>
+            }
             {
               admin?.pendingWithdrawal?.response?.data?.length < 1 && (
                 <p>Tidak ada penggalang dana yang belum diverifikasi.</p>

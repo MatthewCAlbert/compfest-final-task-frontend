@@ -8,6 +8,7 @@ import { theme } from '@/config/emotion'
 import { useSelector } from '@/hooks/useReduxSelector'
 import { useDispatch } from 'react-redux'
 import { getUserDonationHistory } from '@/redux/actions/userActions'
+import Skeleton from '@/components/Skeleton'
 
 const DonateHistoryItem = ({data}: {
   data: {
@@ -55,6 +56,9 @@ const DonationHistoryPage = () => {
       <SEO title="Riwayat Donasi"/>
       <section className="section">
         <div className="section-inner pt-4">
+          {
+            !profile?.donationHistory?.response && <Skeleton/>
+          }
           {
             profile?.donationHistory?.response?.data?.map((el)=>(
               <DonateHistoryItem key={el.ID} data={{
