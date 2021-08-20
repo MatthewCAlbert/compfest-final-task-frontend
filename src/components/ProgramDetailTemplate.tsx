@@ -51,7 +51,7 @@ const ProgramDetailTemplate = ({data, adminMode = false}: {
           top: 20px;
           right: 25px;
         `}>
-          <span className="badge bg-warning text-dark">{formatDateString(data?.deadline, "DD MMMM YYYY")}</span>
+          <span className="badge bg-warning text-dark">sampai {formatDateString(data?.deadline, "DD MMMM YYYY")}</span>
         </div>
       </div>
       <div className="px-3 py-4" css={css`

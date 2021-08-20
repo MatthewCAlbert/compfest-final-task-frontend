@@ -18,7 +18,7 @@ const Carousel: React.FC<{
 
   return (
     <Slider {...settings} className={className} css={css`
-      max-width: ${cssVariables.maxWidth};
+      /* max-width: ${cssVariables.maxWidth}; */
       position: relative;
     `}>
       {children}

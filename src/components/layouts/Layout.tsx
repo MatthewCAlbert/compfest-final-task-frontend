@@ -27,6 +27,7 @@ const Layout: React.FC<{
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      position: relative;
       max-width: ${cssVariables.maxWidth};
       overflow: hidden;
       main#main{
@@ -36,6 +37,7 @@ const Layout: React.FC<{
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        position: relative;
         padding-top: ${cssVariables.headerHeight};
         padding-bottom: ${cssVariables.navHeight};
         background-color: white;

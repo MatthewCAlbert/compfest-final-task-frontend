@@ -78,7 +78,11 @@ const IndexPage = () => {
         </section>
         )
       }
-      <MainHeroCarousel/>
+      <section className="section">
+        <div className="section-inner">
+          <MainHeroCarousel/>
+        </div>
+      </section>
       <section className="section">
         <div className="section-inner">
           <h2 className="mt-5 text-start w-100 h3">Terbaru</h2>

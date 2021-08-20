@@ -39,7 +39,6 @@
 
 ## Notice
 - Expired Token Not Handled Yet.
-- Main Carousel not filled yet.
 
 ## Docker Info
 - Build on NodeJs v12 Alpine

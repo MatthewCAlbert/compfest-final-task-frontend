@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { clearSearchDonationProgram, searchDonationProgram } from '@/redux/actions/programActions'
 import qs from 'query-string';
 import { useHistory } from 'react-router-dom'
-import ContentLoader, { List as ListSkeleton } from 'react-content-loader'
+import ContentLoader from 'react-content-loader'
 
 const SearchPage = () => {
   const history = useHistory();

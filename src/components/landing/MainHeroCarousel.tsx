@@ -3,15 +3,27 @@ import { css } from '@emotion/react'
 import React from 'react'
 import Carousel from '../Carousel'
 
+const carouselContents = [
+  {
+    name: "perkenalan",
+    link: "slide-1.png"
+  },
+  {
+    name: "promo",
+    link: "slide-2.png"
+  }
+]
+
 const MainHeroCarousel = () => {
   return (
     <Carousel className="mt-4" config={{
-      arrows: false
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 5000
     }}>
       {
-        [1,2,3].map((el,id)=>(
+        carouselContents.map((el,id)=>(
           <div key={id} css={css`
-            padding: 0 20px;
             cursor: grab;
             display: flex !important;
             justify-content: center;
@@ -21,13 +33,11 @@ const MainHeroCarousel = () => {
               overflow: hidden;
               background-color: ${theme.blue};
               border-radius: 7px;
-              aspect-ratio: 1.89;
-              min-width: 320px;
-              ${mqCustom(460)}{
-                min-width: 420px;
-              }
-            `}>
-              {el}
+              width: 100%;
+              max-width: 100%;
+              background-image: url("/img/${el.link}");
+              aspect-ratio: 2;
+            `} className="bg-image-center">
             </div>
           </div>
         ))

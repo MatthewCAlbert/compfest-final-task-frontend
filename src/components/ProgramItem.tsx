@@ -1,4 +1,5 @@
 import { theme } from '@/config/emotion';
+import { formatDateString } from '@/utils/utils';
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -30,17 +31,14 @@ const ProgramItem: React.FC<{
         overflow: hidden;
         background-color: ${theme.darkblue};
         .label{
-          border-radius: 10px;
-          background-color: yellow;
           position: absolute;
           bottom: 10px;
           right: 10px;
-          padding: 3px 10px;
           font-size: .73rem;
         }
       `}>
-        <div className="label">
-          sampai {data.deadline}
+        <div className="label badge bg-warning text-dark">
+          sampai {formatDateString(data.deadline, "DD-MMM-YYYY")}
         </div>
       </div>
       <div css={css`
