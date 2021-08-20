@@ -59,6 +59,7 @@ const FundraiserItem = ({data, setLoading}: {
       border-radius: 10px;
       background-color: ${theme.lightblue};
       padding: 15px;
+      font-size: .9em;
     `} className="mb-2">
       <div className="d-flex justify-content-between">
         <div>

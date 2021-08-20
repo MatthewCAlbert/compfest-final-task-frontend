@@ -30,7 +30,7 @@ const InboxItem = ({data}: {
       flex-direction: column;
       border-radius: 10px;
       background-color: ${theme.lightblue};
-      padding: 15px;
+      padding: 10px 15px;
       font-size: .83em;
     `} className="mb-2">
       <div>
@@ -39,7 +39,7 @@ const InboxItem = ({data}: {
       </div>
       <div className="d-flex justify-content-end">
         <div>
-          <strong>{formatDateString(data.time, "DD-MMM-YYYY HH:mm")}</strong>
+          <strong>{formatDateString(data.time, "DD-MMM-YYYY | HH:mm")}</strong>
         </div>
       </div>
     </Link>
@@ -65,7 +65,7 @@ const InboxPage = () => {
       <SEO title="Inbox"/>
       <section className="section">
         <div className="section-inner pt-4 d-flex flex-column">
-          <h1 className="h3 mb-3">Program Saya</h1>
+          <h1 className="h3 mb-3">Notifikasi Admin</h1>
           <div>
             {
               !admin?.adminNotification?.response && <Skeleton/>

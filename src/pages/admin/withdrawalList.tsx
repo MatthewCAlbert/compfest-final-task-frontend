@@ -19,6 +19,7 @@ import { theme } from '@/config/emotion'
 const WithdrawalRequestItem = ({data, setLoading}: {
   data: {
     id: string,
+    title: string,
     status: statusEnum
     amount: number,
     owner: string,
@@ -68,6 +69,7 @@ const WithdrawalRequestItem = ({data, setLoading}: {
         <div>
           <div>Pemohon: <strong>{data.owner || "undefined"}</strong></div>
           <div>Jumlah: <strong>Rp. {formatNumber(data.amount)}</strong></div>
+          <div>Judul: <strong>{data?.title || "undefined"}</strong></div>
           <div>
             <Link to={`/program/${data.programId}`} target="_blank" className="text-primary"><small>Lihat Program</small></Link>
           </div>
@@ -124,9 +126,10 @@ const AdminWithdrawalListPage = () => {
                 <WithdrawalRequestItem key={el.ID} setLoading={setLoading} data={{
                   id: el.ID,
                   amount: el?.amount,
+                  title: el?.title,
                   status: el?.status,
                   programId: el?.donation_program_id,
-                  date: el?.CreatedAt,
+                  date: el?.created_at,
                   owner: el?.user?.name,
                 }}/>
               ))
