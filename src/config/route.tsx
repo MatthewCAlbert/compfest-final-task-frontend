@@ -115,6 +115,7 @@ export const privateRoute: RouteItemInterface[] = [
       icon: "",
     },
     path: "/inbox",
+    requiredRoles: [roles.admin],
     component: InboxPage,
     exact: true
   },

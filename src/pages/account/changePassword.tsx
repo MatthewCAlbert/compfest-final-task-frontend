@@ -25,7 +25,7 @@ const ChangePasswordPage = () => {
     if( newPassword !== rePassword ) return toast.error("Password tidak sama");
     setLoading(true);
     dispatch(changePasswordAction({
-      oldPassword, newPassword
+      currentPassword: oldPassword, password: newPassword, confirmPassword: rePassword
     }));
   }
 

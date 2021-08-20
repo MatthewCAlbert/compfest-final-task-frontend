@@ -13,8 +13,6 @@ export const clearSearchDonationProgram = () => {
   }
 };
 
-
-
 export const getDonationProgramList = () => {
   return {
     type: types.FETCH_PROGRAM_LIST,

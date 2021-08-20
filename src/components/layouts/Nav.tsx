@@ -1,4 +1,6 @@
 import { cssVariables, mq, theme } from '@/config/emotion'
+import { roles } from '@/config/enums'
+import { useSelector } from '@/hooks/useReduxSelector'
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -36,13 +38,20 @@ const NavLink: React.FC<{
 }
 
 const Nav = () => {
+  const auth = useSelector((state)=>state.auth);
+
   return (
     <BottomNavTemplate background={theme.lightblue}>
       <div className="nav-inner">
         <NavLink href="/" title="Home" icon="fas fa-home"/>
         <NavLink href="/search" title="Donasi" icon="fas fa-hand-holding-usd"/>
-        <NavLink href="/dompet" title="Dompet" icon="fas fa-wallet"/>
-        <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/>
+        {
+          auth?.token && (
+            auth?.user?.role === roles.admin ?
+            <NavLink href="/inbox" title="Inbox" icon="fas fa-envelope"/> :
+            <NavLink href="/dompet" title="Dompet" icon="fas fa-wallet"/>
+          )
+        }
         <NavLink href="/account" title="Akun" icon="fas fa-user"/>
       </div>
     </BottomNavTemplate>

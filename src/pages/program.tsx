@@ -121,8 +121,8 @@ const ProgramPage = () => {
 
           <ProgramDetailTemplate data={{
             id: donationProgramDetail?.ID,
-            donator: donationProgramDetail?.donations?.length,
-            name: donationProgramDetail?.user?.name,
+            donator: donationProgramDetail?.Donation?.length,
+            name: donationProgramDetail?.fundraiser_name,
             title: donationProgramDetail?.title,
             amount: [donationProgramDetail?.collected, donationProgramDetail?.amount],
             content: donationProgramDetail?.detail,
@@ -138,7 +138,7 @@ const ProgramPage = () => {
                 font-size: .9em;  
               }
             `} className="mt-4 shadow">
-            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.donations?.length || 0})</h2>
+            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.Donation?.length || 0})</h2>
             <div>
               {
                 donationProgramDetail?.Donation?.map((el, index)=>(

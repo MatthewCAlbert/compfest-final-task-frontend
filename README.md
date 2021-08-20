@@ -1,5 +1,8 @@
 # Compfest Final Task Frontend - PENTA Team
 
+## Visit Deployment
+> [pentapeduli.hexalogi.cyou](https://pentapeduli.hexalogi.cyou/)
+
 ## Made Using
 - React 17
 - React Redux-Redux Saga
@@ -10,16 +13,14 @@
 - React Slick
 - React Hot Toast
 - React Hook Form
-- SWR
-- JS Cookie
 
 ## TODO
 - [x] Auth
 - [x] Edit Profile
-- [x] Change Password (left: api)
-- [x] Search (left: api fix)
-- [x] Public Program List (left: api fix)
-- [x] Public Program Detail (left: api fix)
+- [x] Change Password
+- [x] Search
+- [x] Public Program List
+- [x] Public Program Detail
 - [x] Public Program Donate
 - [x] Top Up
 - [x] Wallet History
@@ -38,7 +39,6 @@
 
 ## Notice
 - Expired Token Not Handled Yet.
-- Donation Programs not available yet to public.
 - Main Carousel not filled yet.
 
 ## Docker Info

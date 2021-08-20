@@ -42,7 +42,7 @@ export const clearEditProfileAction = () => {
 
 export const changePasswordAction = (data: ChangePasswordRequest) => {
   return {
-    type: types.EDIT_USER,
+    type: types.CHANGE_PASSWORD,
     payload: data
   }
 };
