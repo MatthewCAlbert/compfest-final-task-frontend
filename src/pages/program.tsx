@@ -138,7 +138,7 @@ const ProgramPage = () => {
                 font-size: .9em;  
               }
             `} className="mt-4 shadow">
-            <h2 className="h5 fw-bold mb-3">Para Donatur ({donationProgramDetail?.Donation?.length || 0})</h2>
+            <h2 className="h5 fw-bold mb-3">Para Donatur ({formatNumber(donationProgramDetail?.Donation?.length || 0)})</h2>
             <div>
               {
                 donationProgramDetail?.Donation?.map((el, index)=>(

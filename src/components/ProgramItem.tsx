@@ -1,5 +1,5 @@
 import { theme } from '@/config/emotion';
-import { formatDateString } from '@/utils/utils';
+import { formatDateString, formatNumber } from '@/utils/utils';
 import { css } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -66,11 +66,11 @@ const ProgramItem: React.FC<{
         </div>
         <div className="d-flex justify-content-between w-100">
           <div className="d-flex flex-column">
-            <span>Rp {data.raised[0]}</span>
+            <span>Rp {formatNumber(data?.raised[0] || 0)}</span>
             <span>Terkumpul</span>
           </div>
           <div className="d-flex flex-column align-items-end">
-            <span>Rp {data.raised[1]}</span>
+            <span>Rp {formatNumber(data?.raised[1] || 0)}</span>
             <span>Target</span>
           </div>
         </div>

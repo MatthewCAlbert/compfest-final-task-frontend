@@ -58,7 +58,7 @@ const ProgramDetailTemplate = ({data, adminMode = false}: {
         font-size: .9em;
       `}>
         <h1 className="h4 fw-bold">{data?.title}</h1>
-        <p className="mb-1">{data?.donator || 0} Donatur</p>
+        <p className="mb-1">{formatNumber(data?.donator || 0)} Donatur</p>
         
         {
           !adminMode && (

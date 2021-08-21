@@ -55,7 +55,7 @@ const SearchPage = () => {
                 <ProgramItem key={el.ID || index} data={{
                   id: el.ID,
                   title: el?.title,
-                  raised: [el?.colected, el?.amount],
+                  raised: [el?.collected, el?.amount],
                   deadline: el?.deadline,
                   link: `/program/${el}`
                 }}/>
