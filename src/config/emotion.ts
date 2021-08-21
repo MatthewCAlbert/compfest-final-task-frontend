@@ -28,6 +28,6 @@ export const theme = {
 
 export const cssVariables = {
   maxWidth: "480px",
-  headerHeight: "60px",
+  headerHeight: "65px",
   navHeight: "70px",
 }

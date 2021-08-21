@@ -13,6 +13,7 @@
 - React Slick
 - React Hot Toast
 - React Hook Form
+- SweetAlert2
 
 ## TODO
 - [x] Auth
@@ -28,14 +29,14 @@
 - [x] Inbox
 - [x] Fundraiser: Create New Program
 - [x] Fundraiser: My Program List 
-- [x] Fundraiser: My Program Detail (left: testing)
-- [x] Fundraiser: My Program Withdraw (left: testing)
+- [x] Fundraiser: My Program Detail
+- [x] Fundraiser: My Program Withdraw
 - [x] Admin: Pending Fundraiser
-- [x] Admin: Pending Program (left: testing)
-- [x] Admin: Pending Withdrawal (left: testing)
+- [x] Admin: Pending Program
+- [x] Admin: Pending Withdrawal
 - [x] Admin: Verify Fundraiser
-- [x] Admin: Verify Program (left: testing)
-- [x] Admin: Verify Withdrawal (left: testing)
+- [x] Admin: Verify Program
+- [x] Admin: Verify Withdrawal
 
 ## Notice
 - Expired Token Not Handled Yet.

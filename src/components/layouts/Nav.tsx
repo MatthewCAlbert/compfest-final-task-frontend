@@ -19,15 +19,15 @@ const NavLink: React.FC<{
       color: ${theme.darkblue};
       padding: 0 10px;
       width: 90px;
-      padding-top: 10px;
+      padding-top: 5px;
       font-size: .83rem;
       ${mq.sm}{
-        font-size: 1rem;
+        font-size: .9rem;
       }
       i{
         font-size: 1.13rem;
         ${mq.sm}{
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
       }
     `}>

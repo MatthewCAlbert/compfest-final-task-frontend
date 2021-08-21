@@ -42,6 +42,7 @@ const Header: React.FC<{
       top: 0;
       display: flex;
       width: 100%;
+      padding-top: 5px;
       justify-content: center;
       background-color: #00aeef;
       height: ${cssVariables.headerHeight};
