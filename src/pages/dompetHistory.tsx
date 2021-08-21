@@ -60,11 +60,16 @@ const DompetHistoryPage = () => {
             !profile?.walletHistory?.response && <Skeleton/>
           }
           {
-            profile?.walletHistory?.response?.data?.map((el)=>(
-              <DompetHistoryItem key={el.ID} data={{
+            profile?.walletHistory?.response?.data?.length < 1 && (
+              <p>Tidak ada riwayat transaksi.</p>
+            )
+          }
+          {
+            profile?.walletHistory?.response?.data?.map((el, index)=>(
+              <DompetHistoryItem key={index} data={{
                 type: "Topup",
                 amount: el?.amount,
-                date: el?.created_at
+                date: el?.date
               }}/>
             ))
           }

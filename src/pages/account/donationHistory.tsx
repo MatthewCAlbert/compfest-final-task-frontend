@@ -9,6 +9,7 @@ import { useSelector } from '@/hooks/useReduxSelector'
 import { useDispatch } from 'react-redux'
 import { getUserDonationHistory } from '@/redux/actions/userActions'
 import Skeleton from '@/components/Skeleton'
+import { Link } from 'react-router-dom'
 
 const DonateHistoryItem = ({data}: {
   data: {
@@ -58,6 +59,15 @@ const DonationHistoryPage = () => {
         <div className="section-inner pt-4">
           {
             !profile?.donationHistory?.response && <Skeleton/>
+          }
+          {
+            profile?.donationHistory?.response?.data?.length < 1 && (
+              <p>
+                Tidak ada riwayat donasi.
+                <br />
+                <small>Yuk mulai berdonasi atau bisa <Link to="/search" className="text-primary">klik di sini</Link> untuk mulai mencari.</small>
+              </p>
+            )
           }
           {
             profile?.donationHistory?.response?.data?.map((el)=>(

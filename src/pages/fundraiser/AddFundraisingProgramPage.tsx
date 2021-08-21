@@ -34,7 +34,10 @@ const AddFundraisingProgramPage = () => {
       setSubmitted(true);
     }
     if( fundraiser?.create?.error ){
-      toast.error("Gagal membuat permintaan program baru!");
+      if( fundraiser?.create?.error?.response?.data?.message === "Only fundraiser can create donation program" )
+        toast.error("Anda mungkin belum diverifikasi.");
+      else
+        toast.error("Gagal membuat permintaan program baru!");
     }
     dispatch(clearCreateDonationProgramResponse());
     setLoading(false);

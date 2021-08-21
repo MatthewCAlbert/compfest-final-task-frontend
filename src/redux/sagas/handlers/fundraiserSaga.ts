@@ -25,12 +25,12 @@ export function* getAllFundraiserProgramSaga() {
   }
 }
 
-export function* createProgramWithdrawalRequestSaga(payload: PayloadAction<string>) {
+export function* createProgramWithdrawalRequestSaga(payload: PayloadAction<{program_id: string, amount: number}>) {
   try {
-    const response: AxiosResponse = yield call(requestProgramWithdrawalService, payload.payload);
+    const response: AxiosResponse = yield call(requestProgramWithdrawalService, payload.payload?.program_id, payload.payload?.amount);
     const {data} = response;
-    yield put({ type: types.FETCH_PROGRAM_DETAIL_SUCCESS, response: data });
+    yield put({ type: types.CREATE_PROGRAM_WITHDRAWAL_REQUEST_SUCCESS, response: data });
   } catch(error) {
-    yield put({ type: types.FETCH_PROGRAM_DETAIL_ERROR, error });
+    yield put({ type: types.CREATE_PROGRAM_WITHDRAWAL_REQUEST_ERROR, error });
   }
 }

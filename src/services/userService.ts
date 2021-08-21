@@ -40,9 +40,11 @@ export function topUpService( amount: number ) {
   return mutator();
 }
 
-export function requestProgramWithdrawalService( program_id: string ) {
+export function requestProgramWithdrawalService( program_id: string, amount: number ) {
   const mutator = ()=>{
-    return apiInstance.post(`api/withdraw/${program_id}`);
+    return apiInstance.post(`api/withdraw/${program_id}`, {
+      amount
+    });
   }
 
   return mutator();
