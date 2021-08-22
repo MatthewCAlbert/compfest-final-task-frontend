@@ -52,12 +52,12 @@ const SearchPage = () => {
             }
             {
               program?.search?.response?.data?.map((el, index)=>(
-                <ProgramItem key={el.ID || index} data={{
-                  id: el.ID,
+                <ProgramItem key={el.id || index} data={{
+                  id: el?.id,
                   title: el?.title,
                   raised: [el?.collected, el?.amount],
                   deadline: el?.deadline,
-                  link: `/program/${el}`
+                  link: `/program/${el?.id}`
                 }}/>
               ))
             }
