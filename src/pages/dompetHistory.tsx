@@ -67,7 +67,7 @@ const DompetHistoryPage = () => {
           {
             profile?.walletHistory?.response?.data?.map((el, index)=>(
               <DompetHistoryItem key={index} data={{
-                type: "Topup",
+                type: el?.action,
                 amount: el?.amount,
                 date: el?.date
               }}/>

@@ -74,10 +74,10 @@ const AdminProgramDetailPage = () => {
         
           <ProgramDetailTemplate data={{
             id: "32",
-            donator: programDetail?.amount,
+            donator: programDetail?.Donation?.length,
             name: programDetail?.user?.name,
             title: programDetail?.title,
-            amount: [0,programDetail?.amount],
+            amount: [programDetail?.collected,programDetail?.amount],
             content: programDetail?.detail,
             deadline: programDetail?.deadline
           }} adminMode={true}/>

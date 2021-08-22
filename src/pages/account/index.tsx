@@ -9,6 +9,7 @@ import { useSelector } from '@/hooks/useReduxSelector'
 import { theme } from '@/config/emotion'
 import { capitalizeFirstLetter } from '@/utils/utils'
 import { roles } from '@/config/enums'
+import clsx from 'clsx'
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ const AccountPage = () => {
             </div>
             <div className="ms-3">
               <span className="d-block h4 mb-0">{user?.name}</span>
+              <div className="d-flex">
+                <span className={clsx("d-block h6 mb-0 badge", user?.status === "verified" ? "bg-success" : "bg-warning")}>{capitalizeFirstLetter(user?.status)}</span>
+              </div>
               <span className="d-block h6">{capitalizeFirstLetter(user?.role)}</span>
             </div>
           </div>
